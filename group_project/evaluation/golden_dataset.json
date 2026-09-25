@@ -1,0 +1,83 @@
+[
+  {
+    "question": "Lộ trình cuộc thi AI Product Hackathon gồm những giai đoạn nào?",
+    "expected_answer": "Lộ trình Hackathon gồm 5 giai đoạn qua 6 mốc checkpoint: Giai đoạn 1 · Khám phá (Phát đề → CP1 Canvas); Giai đoạn 2 · Thiết kế & Spec (CP1 → CP4 Hạn chốt spec); Giai đoạn 3 · Build (CP2 → CP3); Giai đoạn 4 · Đo & Validate (CP3 → CP5); Giai đoạn 5 · Demo & Nộp (CP5 → CP6).",
+    "expected_context": "Lộ trình 5 Giai đoạn qua 6 Mốc Checkpoint: Giai đoạn 1 · Khám phá (Phát đề → CP1 Canvas), Giai đoạn 2 · Thiết kế & Spec (CP1 → CP4 Hạn chốt spec), Giai đoạn 3 · Build (CP2 → CP3), Giai đoạn 4 · Đo & Validate (CP3 → CP5), Giai đoạn 5 · Demo & Nộp (CP5 → CP6)."
+  },
+  {
+    "question": "Tiêu chuẩn nghiệm thu theo Đường A (Khảo sát & Phỏng vấn) trong Hackathon là gì?",
+    "expected_answer": "Đường A yêu cầu tối thiểu 20 người dùng mục tiêu ngoài nhóm tham gia khảo sát, trong đó tỷ lệ xác nhận nỗi đau phải đạt từ 50% trở lên. Bắt buộc lưu log đầy đủ gồm câu hỏi, câu trả lời nguyên văn và thông tin đối tượng phỏng vấn.",
+    "expected_context": "Đường A — Khảo sát & Phỏng vấn: Tối thiểu 20 người dùng mục tiêu ngoài nhóm tham gia khảo sát, trong đó tỷ lệ xác nhận nỗi đau phải đạt từ 50% trở lên. Bắt buộc lưu log đầy đủ: câu hỏi, câu trả lời nguyên văn và thông tin đối tượng phỏng vấn."
+  },
+  {
+    "question": "Bản Canvas 7 dòng bắt buộc tại Checkpoint 1 của Hackathon gồm những nội dung gì?",
+    "expected_answer": "Bản Canvas 7 dòng gồm: 1. Track đề tài (Track A-E) và tên đề tài đã chọn; 2. Job Executor (vai trò người dùng cụ thể); 3. Nỗi đau trong một câu; 4. 1-2 bằng chứng đầu tiên chứng minh nỗi đau có thật; 5. Lát cắt một câu; 6. Mức độ tự động hóa dự kiến và 1 dòng lý do lựa chọn; 7. Ít nhất 3 người dùng sẵn sàng thử nghiệm và bảng phân công nhiệm vụ có tên từng thành viên.",
+    "expected_context": "Cấu trúc Khung Canvas CP1 (7 Dòng bắt buộc): 1. Track đề tài (Track A-E) và tên đề tài đã chọn. 2. Job Executor (vai trò người dùng cụ thể). 3. Nỗi đau trong một câu. 4. 1-2 bằng chứng đầu tiên chứng minh nỗi đau có thật. 5. Lát cắt một câu. 6. Mức độ tự động hóa dự kiến và 1 dòng lý do lựa chọn. 7. Ít nhất 3 người dùng sẵn sàng thử nghiệm và bảng phân công nhiệm vụ cụ thể có tên từng thành viên."
+  },
+  {
+    "question": "Ban tổ chức AI20K yêu cầu bao nhiêu deliverables bắt buộc cho ngày Demo Day?",
+    "expected_answer": "Ban Tổ Chức (BTC) AI20K yêu cầu mỗi đội nộp đầy đủ 10 deliverables cho sự kiện Demo Day: 1. Source Code; 2. README.md; 3. Architecture Diagram; 4. AI Logs; 5. Live URL; 6. Video Demo; 7. Pitch Deck; 8. Development Journal; 9. Worklog; 10. Evaluation Evidence.",
+    "expected_context": "Ban Tổ Chức (BTC) AI20K yêu cầu mỗi đội nộp đầy đủ 10 deliverables cho sự kiện Demo Day. Hoàn thành đủ 10/10 deliverables là điều kiện tiên quyết để đạt điểm tối đa ở tiêu chí 'Hoàn thành deliverables'."
+  },
+  {
+    "question": "Deliverable Architecture Diagram trong Demo Day cần thể hiện các tầng hệ thống nào?",
+    "expected_answer": "Architecture Diagram cần thể hiện rõ các tầng hệ thống: Frontend, Backend API, AI Agent (LangGraph), Vector Store / Database, và kết nối dịch vụ bên ngoài. Đặt tại docs/architecture.md hoặc file ảnh/PDF.",
+    "expected_context": "Architecture Diagram: Sơ đồ kiến trúc thể hiện rõ các tầng hệ thống: Frontend, Backend API, AI Agent (LangGraph), Vector Store / Database, và kết nối dịch vụ bên ngoài. Đặt tại docs/architecture.md hoặc file ảnh/PDF."
+  },
+  {
+    "question": "Quy định về việc triển khai Live URL cho sự kiện Demo Day như thế nào?",
+    "expected_answer": "Đường dẫn website truy cập thực tế qua internet cần deploy frontend lên Vercel/Netlify và backend lên Render/Cloud. Đảm bảo URL duy trì hoạt động tối thiểu đến hết Demo Day cộng thêm 7 ngày.",
+    "expected_context": "Live URL: Đường dẫn website truy cập thực tế qua internet. Deploy frontend lên Vercel/Netlify và backend lên Render/Cloud. Đảm bảo URL duy trì hoạt động tối thiểu đến hết Demo Day + 7 ngày."
+  },
+  {
+    "question": "Báo cáo Mentor Duty submit trên Discord gồm những trường thông tin bắt buộc nào?",
+    "expected_answer": "Báo cáo nộp bằng lệnh /mentor-duty submit trên Discord gồm 5 trường thông tin chuẩn hóa: done (đầu việc đã hoàn thành), doing (công việc đang tích cực triển khai), blocked (khó khăn, vướng mắc cần hỗ trợ), link (đường dẫn sản phẩm, repo, tài liệu), và questions (các câu hỏi cụ thể muốn trao đổi với Mentor).",
+    "expected_context": "Báo cáo bắt buộc gồm 5 trường thông tin chuẩn hóa sau: done: Những đầu việc nhóm đã hoàn thành trong giai đoạn vừa qua. doing: Những công việc nhóm đang tích cực triển khai. blocked: Những khó khăn, vướng mắc kỹ thuật hoặc nghiệp vụ. link: Đường dẫn tới sản phẩm. questions: Các câu hỏi cụ thể, trọng tâm."
+  },
+  {
+    "question": "Thời hạn nộp báo cáo Mentor Duty để được cộng điểm XP là khi nào?",
+    "expected_answer": "Nhóm phải nộp báo cáo trước 12h00 trưa của ngày có buổi Mentor Duty để được cộng điểm XP. Báo cáo nộp sau 12h00 trưa vẫn được ghi nhận nhưng không được cộng điểm thưởng XP.",
+    "expected_context": "Deadline nhận XP: Nhóm phải nộp báo cáo trước 12h00 trưa của ngày có buổi Mentor Duty để được cộng điểm XP. Báo cáo nộp sau 12h00 trưa vẫn được hệ thống ghi nhận nhưng nhóm sẽ không được cộng điểm thưởng XP."
+  },
+  {
+    "question": "Học viên tham gia chương trình AI Thực chiến nhận được mức phụ cấp và học phí như thế nào?",
+    "expected_answer": "Học viên được miễn học phí và nhận phụ cấp 8 triệu VND/tháng trong 03 tháng tham gia chương trình.",
+    "expected_context": "Học viên được miễn học phí và nhận phụ cấp 8 triệu VND/tháng trong 03 tháng tham gia chương trình."
+  },
+  {
+    "question": "Chương trình AI Thực chiến gồm bao nhiêu tuần học lý thuyết và bao nhiêu tuần làm dự án thực chiến?",
+    "expected_answer": "Học viên có 03 tuần thực học về tư duy AI, đạo đức AI, kỹ năng AI, giải quyết vấn đề bằng trợ lý AI; sau đó là 09 tuần thực chiến với dự án AI thật, được đội ngũ huấn luyện viên là quản lý dự án AI của Vingroup và các doanh nghiệp đối tác kèm cặp.",
+    "expected_context": "Học viên có 03 tuần thực học về tư duy AI, đạo đức Al, kỹ năng AI, giải quyết vấn đề bằng trợ lý Al… với sự hướng dẫn của những giảng viên thực chiến giàu kinh nghiệm về AI. Học viên có 09 tuần thực chiến với dự án AI thật, được đội ngũ huấn luyện viên là quản lý dự án AI của Vingroup và các doanh nghiệp đối tác kèm cặp."
+  },
+  {
+    "question": "Chứng chỉ tốt nghiệp chương trình AI Thực chiến do đơn vị nào cấp?",
+    "expected_answer": "Chứng chỉ đào tạo do Trường Đại học VinUni và Tập đoàn Vingroup đồng cấp, danh giá và uy tín.",
+    "expected_context": "Chứng chỉ đào tạo do Trường Đại học VinUni và Tập đoàn Vingroup đồng cấp, danh giá và uy tín."
+  },
+  {
+    "question": "Đối tượng tuyển sinh của Chương trình Đào tạo Nhân tài AI Thực chiến là ai?",
+    "expected_answer": "Chương trình tuyển sinh các sinh viên năm cuối, người mới tốt nghiệp hoặc các kỹ sư trẻ ngành Công nghệ thông tin, Khoa học máy tính, Toán - Tin và các ngành kỹ thuật liên quan có đam mê và nền tảng tốt.",
+    "expected_context": "Chương trình tuyển sinh dành cho sinh viên năm cuối, người mới tốt nghiệp hoặc các kỹ sư trẻ các ngành Công nghệ thông tin, Toán - Tin, Kỹ thuật có đam mê ứng dụng AI giải quyết bài toán thực tế."
+  },
+  {
+    "question": "Mục tiêu cốt lõi của Tập đoàn Vingroup khi triển khai chương trình AI Thực chiến là gì?",
+    "expected_answer": "Mục tiêu là kiến tạo lực lượng nhân lực AI chất lượng cao, có năng lực 'nói được – làm được', giải quyết hiệu quả các bài toán thực tế, góp phần thúc đẩy sự phát triển của đất nước trong kỷ nguyên số.",
+    "expected_context": "Chương trình Đào tạo Nhân tài AI Thực chiến – một sáng kiến quy mô lớn do Tập đoàn Vingroup tài trợ, với mục tiêu kiến tạo lực lượng nhân lực AI chất lượng cao, có năng lực 'nói được – làm được', góp phần thúc đẩy sự phát triển của đất nước trong kỷ nguyên số."
+  },
+  {
+    "question": "Quy trình đánh giá năng lực đầu vào của chương trình AI20K gồm những hình thức nào?",
+    "expected_answer": "Quy trình bao gồm kỳ thi đánh giá năng lực 3 ngày tập trung vào kiểm tra khả năng lập trình thực tế, tư duy giải quyết vấn đề và năng lực học hỏi công nghệ mới.",
+    "expected_context": "Kỳ thi đánh giá năng lực 3 ngày là bước kiểm tra toàn diện năng lực lập trình, giải quyết vấn đề và tư duy logic của học viên trước khi vào chương trình."
+  },
+  {
+    "question": "Sau khi tốt nghiệp chương trình AI Thực chiến, học viên có cơ hội nghề nghiệp ra sao?",
+    "expected_answer": "Học viên tốt nghiệp có cơ hội được tuyển dụng vào các công ty thành viên (P&L) của Tập đoàn Vingroup với mức lương đặc biệt hấp dẫn, tỷ lệ thuận với năng lực thực chiến.",
+    "expected_context": "Học viên tốt nghiệp có cơ hội được tuyển dụng vào các P&L của Vingroup với mức lương đặc biệt hấp dẫn, phụ thuộc vào năng lực thực chiến."
+  },
+  {
+    "question": "Quy định về việc bảo mật thông tin và quản lý mã nguồn khi khởi tạo repository dự án AI20K là gì?",
+    "expected_answer": "Toàn bộ mã nguồn phải nằm trong GitHub Organization được BTC chỉ định, có .gitignore chuẩn, không commit các file nhạy cảm chứa API keys/secrets (.env) hoặc file dữ liệu có dung lượng trên 10MB.",
+    "expected_context": "Push toàn bộ mã nguồn lên GitHub. Repo có cấu trúc rõ ràng, có .gitignore chuẩn, không commit file nhạy cảm (.env/secrets) hay file dữ liệu nặng (>10MB)."
+  }
+]
+

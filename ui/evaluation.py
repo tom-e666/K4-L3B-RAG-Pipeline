@@ -1,16 +1,19 @@
-"""A/B evaluation page."""
+"""A/B evaluation page rendering."""
 
 import streamlit as st
-
+from ui.components.hero import render_hero
 from .config import load_evaluation_report, report_has_results
 
 
 def render_evaluation_page() -> None:
-    st.markdown(
-        '<section class="hero"><div class="eyebrow">Đánh giá retrieval</div>'
-        '<h1>So sánh A/B</h1><p>Theo dõi chất lượng tìm kiếm trên cùng bộ câu hỏi đánh giá.</p></section>',
-        unsafe_allow_html=True,
+    """Render the evaluation report dashboard."""
+    render_hero(
+        eyebrow="ĐÁNH GIÁ THỰC NGHIỆM RETRIEVAL",
+        title="Đánh giá & So sánh A/B",
+        subtitle="Theo dõi định lượng chất lượng tìm kiếm giữa Dense-only và Hybrid + RRF trên bộ 16 câu hỏi Golden Dataset.",
+        badges=["RAGAS Framework", "16 Golden Test Cases", "Dual Configuration A/B"],
     )
+
     report = load_evaluation_report()
     if not report_has_results(report):
         st.info(
@@ -28,11 +31,14 @@ def render_evaluation_page() -> None:
             hide_index=True,
             use_container_width=True,
         )
-        st.markdown(
-            '<div class="metric-note">Faithfulness: câu trả lời có bám nguồn không. '
-            'Relevance: câu trả lời có đúng câu hỏi không. Recall/precision: hệ thống có lấy đủ và đúng đoạn tài liệu cần thiết không.</div>',
-            unsafe_allow_html=True,
-        )
         return
-    st.success("Đã tải báo cáo đánh giá từ dự án.")
-    st.markdown(report)
+
+    st.success("✅ Đã tải thành công báo cáo đánh giá A/B từ dự án.")
+    st.markdown(
+        f"""
+        <div class="saas-card" style="margin-top: 1rem; line-height: 1.65;">
+            {report}
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )

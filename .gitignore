@@ -61,5 +61,6 @@ HUONG_DAN_THUC_HIEN_LAB8.md
 group_project/evaluation/RESULT.md
 tests/test_advanced*.py
 
-# Vector Database
+# Vector DB & Embeddings cache
 chroma_db/
+data/embedded_chunks_cache.json

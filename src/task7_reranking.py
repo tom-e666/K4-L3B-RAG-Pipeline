@@ -5,8 +5,6 @@ RRF gộp nhiều bảng xếp hạng mà không cộng trực tiếp cosine sco
 score. Công thức: RRF(d) = sum(1 / (k + rank)), rank bắt đầu từ 1.
 
 Lưu ý: RRF score chỉ phản ánh thứ hạng, không dùng để quyết định fallback.
-
--> Dùng Jina hoặc self host hoặc bất cứ công cụ nào bạn quen
 """
 
 
@@ -23,6 +21,9 @@ def weighted_rrf(
     
     Công thức: RRF_score(d) = dense_weight / (k + rank_dense) + bm25_weight / (k + rank_bm25)
     """
+    if top_k <= 0:
+        return []
+
     scores: dict[str, float] = {}
     items: dict[str, dict] = {}
 
@@ -196,7 +197,6 @@ def llm_listwise_rerank(
 
 
 if __name__ == "__main__":
-    print("Weighted RRF & LLM Listwise Rerank ready.")
-
-
-
+    test_dense = [{"id": "doc1", "content": "A", "score": 0.9, "metadata": {"source": "a", "title": "A", "doc_type": "legal", "url": None, "chunk_index": 0}, "retrieval_method": "dense"}]
+    test_bm25 = [{"id": "doc1", "content": "A", "score": 5.0, "metadata": {"source": "a", "title": "A", "doc_type": "legal", "url": None, "chunk_index": 0}, "retrieval_method": "bm25"}]
+    print(rerank_rrf([test_dense, test_bm25], top_k=2))

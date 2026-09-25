@@ -1,13 +1,12 @@
-
 """
 Task 9 — Retrieval pipeline hoàn chỉnh.
 
 Luồng xử lý:
     1. Chạy semantic_search và lexical_search.
-    2. Fuse hai danh sách bằng RRF đúng một lần.
+    2. Fuse hai danh sách bằng RRF đúng một lần (nếu use_reranking=True).
     3. Lấy best cosine score gốc từ dense results.
     4. Nếu score dưới threshold, thử PageIndex fallback.
-    5. Nếu fallback lỗi, trả hybrid results thay vì crash.
+    5. Nếu fallback lỗi hoặc không khả dụng, trả hybrid results thay vì crash.
 
 Không so sánh threshold với RRF score vì hai thang đo khác nhau.
 """
@@ -15,12 +14,12 @@ Không so sánh threshold với RRF score vì hai thang đo khác nhau.
 import os
 from dotenv import load_dotenv
 
+load_dotenv()
+
 from .task5_semantic_search import semantic_search
 from .task6_lexical_search import lexical_search
 from .task7_reranking import llm_listwise_rerank, rerank_rrf, weighted_rrf
 from .task8_pageindex_vectorless import pageindex_search
-
-load_dotenv()
 
 
 def _parse_float(val: str | None, default: float) -> float:
@@ -32,7 +31,7 @@ def _parse_float(val: str | None, default: float) -> float:
         return default
 
 
-SCORE_THRESHOLD = _parse_float(os.getenv("SCORE_THRESHOLD"), 0.3)
+SCORE_THRESHOLD = _parse_float(os.getenv("SCORE_THRESHOLD"), 0.35)
 DEFAULT_TOP_K = 5
 
 # DENSE_WEIGHT & BM25_WEIGHT đọc từ .env (Mặc định 1.0/1.0 là bản Thường)
@@ -50,6 +49,9 @@ def retrieve(
     use_reranking: bool = True,
 ) -> list[dict]:
     """Trả về hybrid hoặc pageindex SearchResult."""
+    if top_k <= 0:
+        return []
+
     candidate_fetch_k = max(top_k * 3, 15) if (use_reranking and USE_LLM_RERANK) else top_k * 2
     dense = semantic_search(query, top_k=candidate_fetch_k)
     sparse = lexical_search(query, top_k=candidate_fetch_k)
@@ -83,11 +85,10 @@ def retrieve(
                 return fallback
         except Exception:
             pass
+
     return hybrid[:top_k]
 
 
-
-
 if __name__ == "__main__":
-    for result in retrieve("test query", top_k=3):
-        print(result)
+    for result in retrieve("chương trình đào tạo AI", top_k=3):
+        print(result["id"], result["score"], result["retrieval_method"])
