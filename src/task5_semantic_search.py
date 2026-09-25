@@ -45,12 +45,12 @@ def _l2_normalize(vec: np.ndarray) -> np.ndarray:
     return vec
 
 
-def semantic_search(query: str, top_k: int = 10) -> list[dict]:
-    """Trả về dense SearchResult theo score giảm dần. Hỗ trợ HyDE pre-retrieval."""
+def _semantic_search(query: str, top_k: int, use_hyde: bool) -> list[dict]:
+    """Run dense retrieval with an explicit HyDE choice."""
     query_vector = None
     hyde_used = False
 
-    if USE_HYDE:
+    if use_hyde:
         try:
             hypo_doc = generate_hypothetical_document(query)
             if hypo_doc:
@@ -98,6 +98,16 @@ def semantic_search(query: str, top_k: int = 10) -> list[dict]:
             })
 
     return sorted(results, key=lambda item: item["score"], reverse=True)[:top_k]
+
+
+def semantic_search(query: str, top_k: int = 10) -> list[dict]:
+    """Return dense results using the configured HyDE setting."""
+    return _semantic_search(query, top_k, USE_HYDE)
+
+
+def semantic_search_raw(query: str, top_k: int = 10) -> list[dict]:
+    """Return dense results from the original query for A/B comparison."""
+    return _semantic_search(query, top_k, False)
 
 
 if __name__ == "__main__":

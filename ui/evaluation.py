@@ -10,6 +10,7 @@ import pandas as pd
 import streamlit as st
 
 from .config import load_evaluation_report, load_evaluation_runs, report_has_results
+from .components.hero import render_hero
 
 
 LABELS = {
@@ -80,11 +81,11 @@ def _csv_export(rows: list[dict]) -> str:
 
 
 def render_evaluation_page() -> None:
-    st.markdown(
-        '<section class="hero"><div class="eyebrow">AI20K · Golden set</div>'
-        '<h1>So sánh chiến lược RAG</h1>'
-        '<p>Chọn lượt đánh giá, đối chiếu nhiều chiến lược và xem bằng chứng theo từng câu hỏi.</p></section>',
-        unsafe_allow_html=True,
+    render_hero(
+        eyebrow="AI20K • GOLDEN SET",
+        title="So sánh chiến lược RAG",
+        subtitle="Chọn lượt đánh giá, đối chiếu nhiều chiến lược và xem bằng chứng theo từng câu hỏi.",
+        badges=["16 Golden Cases", "DeepSeek", "A/B + Ablation"],
     )
     runs = load_evaluation_runs()
     if not runs:
