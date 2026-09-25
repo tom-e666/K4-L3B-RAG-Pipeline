@@ -156,14 +156,87 @@ def call_llm(system_prompt: str, user_message: str) -> str:
     raise ValueError(f"Unsupported LLM provider: {LLM_PROVIDER}")
 
 
+USE_MMR = os.getenv("USE_MMR", "false").lower() in {"true", "1", "yes"}
+
+
+def mmr_context_packing(
+    query: str,
+    chunks: list[dict],
+    top_k: int = 5,
+    *,
+    lambda_param: float = 0.7,
+) -> list[dict]:
+    """Tối ưu chọn lọc context đa dạng theo Maximal Marginal Relevance (MMR).
+    
+    Formula: MMR(d) = λ * sim(q, d) - (1 - λ) * max_{s ∈ selected} sim(d, s)
+    """
+    if not chunks or len(chunks) <= 1:
+        return chunks[:top_k]
+
+    try:
+        import numpy as np
+        from .task4_chunking_indexing import embed_texts
+
+        texts_to_embed = [query] + [c["content"] for c in chunks]
+        embeddings = embed_texts(texts_to_embed)
+
+        if len(embeddings) != len(texts_to_embed):
+            return chunks[:top_k]
+
+        q_emb = np.array(embeddings[0], dtype=np.float32)
+        doc_embs = [np.array(e, dtype=np.float32) for e in embeddings[1:]]
+
+        def _cosine_sim(a: np.ndarray, b: np.ndarray) -> float:
+            na, nb = np.linalg.norm(a), np.linalg.norm(b)
+            if na == 0 or nb == 0:
+                return 0.0
+            return float(np.dot(a, b) / (na * nb))
+
+        query_sims = [_cosine_sim(q_emb, d_emb) for d_emb in doc_embs]
+
+        unselected_indices = list(range(len(chunks)))
+        selected_indices = []
+
+        # Giữ chunk tốt nhất ở vị trí đầu
+        best_idx = 0
+        selected_indices.append(best_idx)
+        unselected_indices.remove(best_idx)
+
+        target_count = min(top_k, len(chunks))
+        while len(selected_indices) < target_count and unselected_indices:
+            best_mmr_score = -float("inf")
+            best_next_idx = unselected_indices[0]
+
+            for idx in unselected_indices:
+                sim_q_d = query_sims[idx]
+                max_sim_s_d = max(
+                    _cosine_sim(doc_embs[idx], doc_embs[sel_idx])
+                    for sel_idx in selected_indices
+                )
+                mmr_score = lambda_param * sim_q_d - (1.0 - lambda_param) * max_sim_s_d
+
+                if mmr_score > best_mmr_score:
+                    best_mmr_score = mmr_score
+                    best_next_idx = idx
+
+            selected_indices.append(best_next_idx)
+            unselected_indices.remove(best_next_idx)
+
+        return [chunks[i] for i in selected_indices]
+
+    except Exception as exc:
+        logger.warning("MMR context packing failed: %s. Returning default candidates.", exc)
+        return chunks[:top_k]
+
+
 def generate_with_citation(query: str, top_k: int = TOP_K) -> dict:
     """Trả về GenerationResult kèm grounding & citation verification."""
     try:
-        chunks = retrieve(query, top_k=top_k)
+        fetch_k = top_k * 2 if USE_MMR else top_k
+        chunks = retrieve(query, top_k=fetch_k)
     except Exception as exc:
         logger.error(f"Retrieve error: {exc}")
         chunks = []
-
 
     if not chunks:
         return {
@@ -173,7 +246,12 @@ def generate_with_citation(query: str, top_k: int = TOP_K) -> dict:
         }
 
     try:
-        reordered = reorder_for_llm(chunks)
+        if USE_MMR:
+            selected_chunks = mmr_context_packing(query, chunks, top_k=top_k, lambda_param=0.7)
+        else:
+            selected_chunks = chunks[:top_k]
+
+        reordered = reorder_for_llm(selected_chunks)
         context = format_context(reordered)
         user_message = f"Context:\n{context}\n\nQuestion: {query}"
         answer = call_llm(SYSTEM_PROMPT, user_message)
@@ -183,24 +261,25 @@ def generate_with_citation(query: str, top_k: int = TOP_K) -> dict:
             logger.warning("Citation verification failed. Returning safe refusal.")
             return {
                 "answer": SAFE_REFUSAL_ANSWER,
-                "sources": chunks,
-                "retrieval_source": chunks[0]["retrieval_method"],
+                "sources": selected_chunks,
+                "retrieval_source": selected_chunks[0]["retrieval_method"],
             }
 
         return {
             "answer": answer,
-            "sources": chunks,
-            "retrieval_source": chunks[0]["retrieval_method"],
+            "sources": selected_chunks,
+            "retrieval_source": selected_chunks[0]["retrieval_method"],
         }
     except Exception as exc:
         logger.error(f"Generation failed: {exc}")
         return {
             "answer": SAFE_REFUSAL_ANSWER,
-            "sources": chunks,
+            "sources": chunks[:top_k],
             "retrieval_source": chunks[0]["retrieval_method"] if chunks else "none",
         }
 
 
 if __name__ == "__main__":
     print(generate_with_citation("test query"))
+
 
