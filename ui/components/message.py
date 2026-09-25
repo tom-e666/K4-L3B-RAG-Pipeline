@@ -1,6 +1,7 @@
 """Chat message formatting, citation parsing, and source card rendering."""
 
 from __future__ import annotations
+import html
 import re
 from typing import Any
 import streamlit as st
@@ -86,30 +87,33 @@ def render_source_cards(sources: list[dict[str, Any]]) -> None:
             method_badge = method.upper()
 
             link_html = (
-                f'<a href="{url}" target="_blank" style="color: #2563EB; font-weight:600; text-decoration: none;">Mở liên kết ↗</a>'
+                f'<a href="{html.escape(str(url))}" target="_blank" style="color: #2563EB; font-weight:600; text-decoration: none;">Mở liên kết ↗</a>'
                 if url
                 else '<span style="color: #94A3B8;">Tài liệu nội bộ</span>'
             )
 
-            st.markdown(
-                f"""
-                <div class="source-card">
-                    <div class="source-card-header">
-                        <div class="source-title">{index}. {friendly_name}</div>
-                        <div class="source-tags">
-                            <span class="tag-pill tag-pill-highlight">Method: {method_badge}</span>
-                            <span class="tag-pill">Score: {score_str}</span>
-                        </div>
-                    </div>
-                    <div class="source-snippet">"{snippet}"</div>
-                    <div class="source-meta-row">
-                        <span>Tệp: <code>{raw_source}</code></span>
-                        <span>{link_html}</span>
-                    </div>
-                </div>
-                """,
-                unsafe_allow_html=True,
+            esc_fn = html.escape(str(friendly_name))
+            esc_mb = html.escape(str(method_badge))
+            esc_rs = html.escape(str(raw_source))
+            esc_sn = html.escape(str(snippet))
+
+            card_html = (
+                f'<div class="source-card">'
+                f'<div class="source-card-header">'
+                f'<div class="source-title">{index}. {esc_fn}</div>'
+                f'<div class="source-tags">'
+                f'<span class="tag-pill tag-pill-highlight">Method: {esc_mb}</span>'
+                f'<span class="tag-pill">Score: {score_str}</span>'
+                f'</div>'
+                f'</div>'
+                f'<div class="source-snippet">"{esc_sn}"</div>'
+                f'<div class="source-meta-row">'
+                f'<span>Tệp: <code>{esc_rs}</code></span>'
+                f'<span>{link_html}</span>'
+                f'</div>'
+                f'</div>'
             )
+            st.markdown(card_html, unsafe_allow_html=True)
 
 
 def render_message(role: str, content: str, sources: list[dict] | None = None, safe_refusal: bool = False) -> None:
@@ -120,14 +124,12 @@ def render_message(role: str, content: str, sources: list[dict] | None = None, s
     else:
         with st.chat_message("assistant", avatar="🤖"):
             if safe_refusal:
-                st.markdown(
-                    """
-                    <div class="answer-note">
-                        <b>Thông báo:</b> Thông tin này chưa đủ bằng chứng xác thực trong bộ tài liệu AI20K hiện có.
-                    </div>
-                    """,
-                    unsafe_allow_html=True,
+                refusal_html = (
+                    '<div class="answer-note">'
+                    '<b>Thông báo:</b> Thông tin này chưa đủ bằng chứng xác thực trong bộ tài liệu AI20K hiện có.'
+                    '</div>'
                 )
+                st.markdown(refusal_html, unsafe_allow_html=True)
 
             # Format formatted content with badges
             clean_content = format_citations_to_badges(content)

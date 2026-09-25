@@ -85,22 +85,20 @@ def run_single_technique(name: str, query: str, top_k: int) -> dict[str, Any]:
 
 def render_comparison_page(comp_top_k: int = 5) -> None:
     """Render the dedicated retrieval comparison dashboard."""
-    st.markdown(
-        """
-        <div style="margin-bottom: 1.4rem;">
-            <div style="font-size: 0.74rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #2563EB; margin-bottom: 4px;">
-                RETRIEVAL STRATEGY BENCHMARKING
-            </div>
-            <h1 style="font-size: 2.1rem; font-weight: 800; color: #0F172A; margin: 0 0 0.35rem 0; letter-spacing: -0.025em;">
-                So sánh các kỹ thuật Retrieval
-            </h1>
-            <p style="font-size: 0.96rem; color: #64748B; margin: 0; line-height: 1.5;">
-                Chạy cùng một câu hỏi qua nhiều chiến lược retrieval để so sánh trực quan chất lượng kết quả, độ trễ và độ bao phủ tài liệu.
-            </p>
-        </div>
-        """,
-        unsafe_allow_html=True,
+    header_html = (
+        '<div style="margin-bottom: 1.4rem;">'
+        '<div style="font-size: 0.74rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #2563EB; margin-bottom: 4px;">'
+        'RETRIEVAL STRATEGY BENCHMARKING'
+        '</div>'
+        '<h1 style="font-size: 2.1rem; font-weight: 800; color: #0F172A; margin: 0 0 0.35rem 0; letter-spacing: -0.025em;">'
+        'So sánh các kỹ thuật Retrieval'
+        '</h1>'
+        '<p style="font-size: 0.96rem; color: #64748B; margin: 0; line-height: 1.5;">'
+        'Chạy cùng một câu hỏi qua nhiều chiến lược retrieval để so sánh trực quan chất lượng kết quả, độ trễ và độ bao phủ tài liệu.'
+        '</p>'
+        '</div>'
     )
+    st.markdown(header_html, unsafe_allow_html=True)
 
     # Technique selection chips
     st.markdown("<div style='font-size: 0.8rem; font-weight: 700; color: #475569; margin-bottom: 6px;'>CHỌN CHIẾN LƯỢC SO SÁNH:</div>", unsafe_allow_html=True)

@@ -441,16 +441,56 @@ def inject_styles() -> None:
             border-color: #A7F3D0;
         }
 
+        .technique-meta-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.78rem;
+            color: var(--ink-muted);
+            margin-bottom: 0.65rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px dashed var(--border-light);
+        }
+
+        .score-highlight {
+            color: var(--primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+        }
+
+        .doc-list-container {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
         .doc-item-row {
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 0.45rem 0.6rem;
-            margin: 0.25rem 0;
             border-radius: var(--radius-sm);
             background: #F8FAFC;
             font-size: 0.82rem;
             border: 1px solid var(--border-light);
+            transition: background 0.15s ease, border-color 0.15s ease;
+        }
+
+        .doc-item-row:hover {
+            background: #F1F5F9;
+            border-color: #CBD5E1;
+        }
+
+        .doc-item-left {
+            min-width: 0;
+            flex: 1;
+            margin-right: 8px;
+        }
+
+        .doc-title-line {
+            display: flex;
+            align-items: center;
+            min-width: 0;
         }
 
         .doc-rank {
@@ -458,23 +498,53 @@ def inject_styles() -> None:
             color: var(--primary);
             margin-right: 6px;
             font-size: 0.78rem;
+            flex-shrink: 0;
         }
 
         .doc-name {
-            flex-grow: 1;
+            flex: 1;
+            min-width: 0;
             font-weight: 600;
             color: var(--ink);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            padding-right: 8px;
+            cursor: default;
+        }
+
+        .doc-sub-line {
+            display: flex;
+            align-items: center;
+            margin-top: 1px;
+            padding-left: 1.45rem;
+            min-width: 0;
+        }
+
+        .doc-source-file {
+            font-size: 0.7rem;
+            color: var(--ink-subtle);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .doc-item-right {
+            flex-shrink: 0;
+            text-align: right;
+            padding-left: 6px;
         }
 
         .doc-score {
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.76rem;
+            font-weight: 600;
             color: var(--ink-muted);
             white-space: nowrap;
+            background: #FFFFFF;
+            border: 1px solid var(--border);
+            padding: 1px 6px;
+            border-radius: 4px;
         }
 
         /* Ranking Comparison Table */
