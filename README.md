@@ -4,7 +4,7 @@
 
 Mỗi nhóm xây dựng một chatbot RAG trả lời câu hỏi từ bộ tài liệu do nhóm thu thập. Sản phẩm phải có hybrid retrieval, citation, giao diện chat và báo cáo đánh giá.
 
-Nhóm tự chọn bài toán và thu thập dữ liệu phù hợp; repo không cung cấp dữ liệu mẫu.
+Nhóm chọn bộ tài liệu AI20K; tài liệu nguồn và Markdown chuẩn hóa nằm trong `data/`.
 
 ## Sản phẩm phải nộp
 
@@ -28,6 +28,7 @@ cp .env.example .env
 ```
 
 Điền API key cần dùng trong `.env`; không commit file này.
+Để chạy cấu hình DeepSeek hiện dùng khi demo, đặt `LLM_PROVIDER=deepseek`, `LLM_MODEL=deepseek-flash` và `DeepSeek_API_KEY` trong `.env`. File ChromaDB không được nộp; lệnh index bên dưới dựng lại từ Markdown trong repo.
 
 ```bash
 # 1. Thu thập và chuẩn hoá
@@ -46,6 +47,10 @@ streamlit run app.py
 Trong Streamlit, **Chat** dùng pipeline hiện tại để trả lời kèm nguồn. **So sánh các kỹ thuật** chạy một câu hỏi qua Dense, BM25, Hybrid union và Hybrid + RRF để đối chiếu độ trễ, thứ hạng và độ trùng lặp chunks. **Đánh giá A/B** đọc các lượt đo đã lưu, cho chọn nhiều strategy trong cùng một lượt, xem metric tổng hợp, p50, kết quả theo loại câu hỏi và câu trả lời từng case. Các lượt dùng model hoặc phạm vi đo khác nhau được trình bày riêng để tránh so điểm trực tiếp.
 
 Lượt DeepSeek mới nhất có A dense-only, B đầy đủ (HyDE + dense/BM25 + weighted RRF + listwise rerank + MMR + citation gate) và ablation B không HyDE. Xem [báo cáo nhóm và minh chứng đóng góp](reports/GROUP_REPORT.md), [báo cáo tóm tắt](reports/RESULT.md) và [báo cáo evaluation chi tiết](group_project/evaluation/RESULT.md). Để chạy lại lượt mới nhất, cấu hình `DeepSeek_API_KEY` trong `.env` rồi dùng `python -m group_project.evaluation.run_latest_strategy`.
+
+Chat hỗ trợ Conversation Memory: với một hoặc hai lượt trước, DeepSeek viết lại câu hỏi nối tiếp thành câu độc lập trước retrieval. Nếu bước này lỗi, truy xuất dùng câu hỏi gốc. Kết quả probe được lưu trong [evaluation/RESULT.md](group_project/evaluation/RESULT.md#conversation-memory-probe--contextual-query-rewriting).
+
+Trước khi nộp, đối chiếu bốn [báo cáo cá nhân](reports/) với `TEAMMATES.md`, demo một câu trong phạm vi và một câu ngoài phạm vi tại trang Chat, rồi mở trang **Đánh giá A/B** để chỉ bảng so sánh. Mỗi thành viên xác nhận nội dung báo cáo của mình và nộp cùng URL repository nhóm trên VLearn; trạng thái VLearn phải được kiểm tra trực tiếp sau khi nộp.
 
 ## Lộ trình 3 giờ
 

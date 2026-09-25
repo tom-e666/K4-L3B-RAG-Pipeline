@@ -6,6 +6,8 @@ Nhóm xây dựng trợ lý hỏi đáp về chương trình AI20K từ 10 tài 
 
 Pipeline nâng cao: HyDE trước truy xuất → dense + BM25 → weighted RRF → LLM listwise rerank → MMR context packing → grounded generation → citation validation. A dense-only và B không HyDE được giữ làm đối chứng. PageIndex chưa được triển khai; không tính nó là thành phần hoạt động.
 
+Chat có Conversation Memory: DeepSeek dùng tối đa hai lượt trước để viết lại câu hỏi nối tiếp thành câu độc lập trước khi truy xuất; lỗi viết lại sẽ dùng câu hỏi gốc. Probe ba câu hỏi cho expected-source hit top 5 tăng từ 2/3 lên 3/3, trung vị viết lại 1.028 giây. Đây là kiểm tra truy xuất nhỏ, không phải điểm chất lượng câu trả lời; chi tiết ở [evaluation/RESULT.md](../group_project/evaluation/RESULT.md#conversation-memory-probe--contextual-query-rewriting).
+
 ## Đánh giá
 
 Golden set có 16 case: 8 semantic/paraphrase, 4 keyword/tên riêng, 2 cần nhiều nguồn và 2 ngoài phạm vi. Cùng DeepSeek generator/judge, prompt, 304 chunks và `top_k=5` trong lượt đo mới nhất:
