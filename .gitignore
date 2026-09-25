@@ -62,3 +62,4 @@ tests/test_advanced*.py
 
 # Vector Database
 chroma_db/
+data/embedded_chunks_cache.json
