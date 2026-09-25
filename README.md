@@ -43,6 +43,10 @@ pytest -q
 streamlit run app.py
 ```
 
+Trong Streamlit, **Chat** dùng pipeline hiện tại để trả lời kèm nguồn. **Đánh giá A/B** đọc các lượt đo đã lưu, cho chọn nhiều strategy trong cùng một lượt, xem metric tổng hợp, p50, kết quả theo loại câu hỏi và câu trả lời từng case. Các lượt dùng model hoặc phạm vi đo khác nhau được trình bày riêng để tránh so điểm trực tiếp.
+
+Lượt DeepSeek mới nhất có A dense-only, B đầy đủ (HyDE + dense/BM25 + weighted RRF + listwise rerank + MMR + citation gate) và ablation B không HyDE. Xem [báo cáo tóm tắt](reports/RESULT.md) và [báo cáo evaluation chi tiết](group_project/evaluation/RESULT.md). Để chạy lại lượt mới nhất, cấu hình `DeepSeek_API_KEY` trong `.env` rồi dùng `python -m group_project.evaluation.run_latest_strategy`.
+
 ## Lộ trình 3 giờ
 
 | Mốc                  | Thời gian | Kết quả cần có                           |

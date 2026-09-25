@@ -2,9 +2,35 @@
 
 from __future__ import annotations
 
+import html
+import logging
+import re
+from pathlib import Path
 from typing import Any
 
 import streamlit as st
+
+
+STANDARDIZED_DIR = Path(__file__).resolve().parent.parent / "data" / "standardized"
+logger = logging.getLogger(__name__)
+
+
+@st.cache_data
+def source_metadata(filename: str) -> dict[str, str]:
+    """Recover public source title and URL omitted from indexed metadata."""
+    safe_name = Path(filename).name
+    for kind in ("legal", "news"):
+        path = STANDARDIZED_DIR / kind / safe_name
+        if path.is_file():
+            content = path.read_text(encoding="utf-8")
+            header = content.split("---", 2)[1] if content.startswith("---") else ""
+            result = {}
+            for key in ("title", "url"):
+                match = re.search(rf"^{key}:\s*[\"']?(.+?)[\"']?\s*$", header, re.M)
+                if match:
+                    result[key] = match.group(1).strip().strip('"\'')
+            return result
+    return {}
 
 
 def normalize_message(message: Any) -> dict[str, Any]:
@@ -22,16 +48,20 @@ def render_sources(sources: list[dict[str, Any]]) -> None:
     with st.expander(f"Nguồn tham khảo ({len(sources)})", expanded=False):
         for index, source in enumerate(sources, 1):
             metadata = source.get("metadata") or {}
-            title = metadata.get("title") or metadata.get("source") or f"Tài liệu {index}"
             source_name = metadata.get("source") or "Không rõ tên tệp"
-            url = metadata.get("url")
+            original = source_metadata(source_name)
+            title = original.get("title") or metadata.get("title") or source_name
+            url = metadata.get("url") or original.get("url")
             method = source.get("retrieval_method") or "unknown"
             score = source.get("score")
             score_text = f" · điểm {float(score):.3f}" if isinstance(score, (int, float)) else ""
-            link = f'<a href="{url}" target="_blank">Mở nguồn</a>' if url else "Nguồn nội bộ"
+            link = (
+                f'<a href="{html.escape(url, quote=True)}" target="_blank" rel="noopener noreferrer">Mở tài liệu gốc</a>'
+                if isinstance(url, str) and url.startswith(("https://", "http://")) else "Tài liệu trong repo"
+            )
             st.markdown(
-                f'<div class="source-card"><div class="source-title">{index}. {title}</div>'
-                f'<div class="source-meta">{source_name} · {method}{score_text} · {link}</div></div>',
+                f'<div class="source-card"><div class="source-title">{index}. {html.escape(title)}</div>'
+                f'<div class="source-meta">{html.escape(source_name)} · {html.escape(method)}{score_text} · {link}</div></div>',
                 unsafe_allow_html=True,
             )
 
@@ -40,15 +70,22 @@ def render_chat_page() -> None:
     st.markdown(
         '<section class="hero"><div class="eyebrow">AI20K · Tra cứu tài liệu chính thức</div>'
         '<h1>Trợ lý AI Thực Chiến</h1>'
-        '<p>Hỏi về chương trình, lộ trình học và quy định. Câu trả lời luôn đi kèm nguồn để bạn kiểm tra.</p></section>',
+        '<p>Hỏi về chương trình, lộ trình học và quy định. Xem các đoạn tài liệu được truy xuất dưới mỗi câu trả lời.</p></section>',
         unsafe_allow_html=True,
     )
 
     with st.sidebar:
         st.markdown("### Trợ lý AI Thực Chiến")
-        st.caption("Tra cứu thông tin chương trình từ tài liệu chính thức")
-        top_k = st.slider("Số nguồn sử dụng", min_value=3, max_value=10, value=5)
-        if st.button("＋ Cuộc trò chuyện mới", use_container_width=True):
+        st.caption("Tra cứu từ tài liệu AI20K đã lập chỉ mục")
+        st.markdown(
+            '<span class="pipeline-badge">DeepSeek</span>'
+            '<span class="pipeline-badge">Hybrid search</span>'
+            '<span class="pipeline-badge">Citation</span>',
+            unsafe_allow_html=True,
+        )
+        top_k = st.slider("Số đoạn tài liệu", min_value=3, max_value=10, value=5,
+                          help="Số đoạn tối đa dùng để tạo câu trả lời.")
+        if st.button("＋ Cuộc trò chuyện mới", type="primary", width="stretch"):
             st.session_state.messages = []
             st.rerun()
 
@@ -64,9 +101,9 @@ def render_chat_page() -> None:
             '<div>Trợ lý sẽ tìm trong bộ tài liệu AI20K trước khi trả lời.</div></div>',
             unsafe_allow_html=True,
         )
-        cols = st.columns(len(suggestions))
-        for col, suggestion in zip(cols, suggestions):
-            if col.button(suggestion, use_container_width=True):
+        st.caption("Gợi ý câu hỏi")
+        for index, suggestion in enumerate(suggestions):
+            if st.button(suggestion, key=f"suggestion-{index}", width="stretch"):
                 st.session_state.pending_query = suggestion
                 st.rerun()
 
@@ -105,7 +142,11 @@ def render_chat_page() -> None:
                 result = generate_with_citation(query, top_k=top_k)
             answer = str(result.get("answer") or "").strip()
             sources = result.get("sources") or []
-            safe_refusal = not answer or result.get("retrieval_source") == "none"
+            safe_refusal = (
+                not answer
+                or result.get("retrieval_source") == "none"
+                or "không thể xác minh" in answer.lower()
+            )
             if answer:
                 response_box.markdown(answer)
             else:
@@ -120,6 +161,6 @@ def render_chat_page() -> None:
             st.session_state.messages.append(
                 {"role": "assistant", "content": answer, "sources": sources, "safe_refusal": safe_refusal}
             )
-        except Exception as exc:
+        except Exception:
+            logger.exception("Chat request failed")
             response_box.error("Không thể kết nối tới bộ máy RAG lúc này. Nội dung câu hỏi vẫn được giữ lại.")
-            st.caption(f"Chi tiết kỹ thuật: {exc}")

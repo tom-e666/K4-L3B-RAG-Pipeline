@@ -12,6 +12,7 @@ chạy lại pipeline không tạo dữ liệu trùng. Task 5 phải dùng chung
 """
 
 import os
+from functools import lru_cache
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -31,6 +32,12 @@ EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "gemini-embedding-2")
 EMBEDDING_DIM = 768
 
 COLLECTION_NAME = "rag_documents"
+
+
+@lru_cache(maxsize=2)
+def _local_embedding_model(model_name: str):
+    from sentence_transformers import SentenceTransformer
+    return SentenceTransformer(model_name)
 
 
 def embed_texts(texts: list[str]) -> list[list[float]]:
@@ -72,8 +79,7 @@ def embed_texts(texts: list[str]) -> list[list[float]]:
         return [data.embedding for data in response.data]
 
     else:
-        from sentence_transformers import SentenceTransformer
-        model = SentenceTransformer(model_name)
+        model = _local_embedding_model(model_name)
         return model.encode(texts).tolist()
 
 

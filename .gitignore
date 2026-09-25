@@ -58,7 +58,6 @@ Thumbs.db
 
 # Local guide and temporary reports
 HUONG_DAN_THUC_HIEN_LAB8.md
-group_project/evaluation/RESULT.md
 tests/test_advanced*.py
 
 # Vector Database

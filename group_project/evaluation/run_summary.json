@@ -1,0 +1,43 @@
+{
+  "corpus_chunks": 304,
+  "top_k": 5,
+  "model": "gemini-3.5-flash-lite",
+  "embedding_model": "BAAI/bge-m3",
+  "attempts": {
+    "hyde": 16,
+    "rerank": 32,
+    "generation": 48,
+    "judge": 48
+  },
+  "failures": {
+    "hyde": 0,
+    "rerank": 22,
+    "generation": 0,
+    "judge": 2
+  },
+  "pageindex_fallbacks": 0,
+  "pageindex_fallback_available": false,
+  "configs": {
+    "A": {
+      "faithfulness": 0.9688,
+      "answer_relevance": 0.8438,
+      "context_recall": 0.8854,
+      "context_precision": 0.7188,
+      "p50_latency_seconds": 2.897
+    },
+    "B": {
+      "faithfulness": 0.8438,
+      "answer_relevance": 0.75,
+      "context_recall": 0.8229,
+      "context_precision": 0.6823,
+      "p50_latency_seconds": 17.16
+    },
+    "B_no_HyDE": {
+      "faithfulness": 0.875,
+      "answer_relevance": 0.8125,
+      "context_recall": 0.875,
+      "context_precision": 0.7104,
+      "p50_latency_seconds": 14.678
+    }
+  }
+}

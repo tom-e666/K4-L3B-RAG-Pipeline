@@ -1,0 +1,45 @@
+{
+  "model": "deepseek-flash",
+  "embedding_model": "BAAI/bge-m3",
+  "corpus_chunks": 304,
+  "dataset_size": 16,
+  "top_k": 5,
+  "hyde_attempts": 16,
+  "hyde_failures": 0,
+  "rerank_attempts": 32,
+  "rerank_failures": 0,
+  "mmr_attempts": 32,
+  "mmr_failures": 0,
+  "pageindex_fallback_attempts": 0,
+  "pageindex_fallback_rate": 0.0,
+  "errors": {
+    "generation": 0,
+    "judge": 0
+  },
+  "configs": {
+    "A_dense": {
+      "faithfulness": 1.0,
+      "answer_relevance": 0.9062,
+      "context_recall": 0.8854,
+      "context_precision": 0.7188,
+      "p50_latency_seconds": 2.13,
+      "citation_valid_rate": 1
+    },
+    "B_full": {
+      "faithfulness": 1.0,
+      "answer_relevance": 0.9062,
+      "context_recall": 0.8229,
+      "context_precision": 0.8438,
+      "p50_latency_seconds": 11.027,
+      "citation_valid_rate": 1
+    },
+    "B_no_HyDE": {
+      "faithfulness": 1.0,
+      "answer_relevance": 0.8438,
+      "context_recall": 0.8542,
+      "context_precision": 0.8438,
+      "p50_latency_seconds": 9.288,
+      "citation_valid_rate": 1
+    }
+  }
+}

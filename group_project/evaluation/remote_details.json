@@ -1,0 +1,962 @@
+[
+  {
+    "id": "sem-01",
+    "case_type": "semantic",
+    "question": "Nhóm cần gặp người hướng dẫn định kỳ vào những buổi nào?",
+    "config": "A_dense",
+    "answer": "Theo quy định, Mentor Duty diễn ra vào **tối Thứ 4 và Thứ 7 hàng tuần**, tuy nhiên lịch cụ thể có thể thay đổi linh hoạt tùy theo sắp xếp riêng của từng nhóm với Mentor phụ trách [Document 5].",
+    "sources": [
+      "legal/quy-dinh-mentor-duty.md::chunk-5",
+      "legal/quy-dinh-mentor-duty.md::chunk-2",
+      "legal/quy-dinh-mentor-duty.md::chunk-3",
+      "legal/20K-AI-Handbook-ver2.1.md::chunk-40",
+      "legal/quy-dinh-mentor-duty.md::chunk-6"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 1.0,
+    "context_precision": 0.5,
+    "citations_valid": true,
+    "latency_seconds": 19.685
+  },
+  {
+    "id": "sem-01",
+    "case_type": "semantic",
+    "question": "Nhóm cần gặp người hướng dẫn định kỳ vào những buổi nào?",
+    "config": "remote_weighted",
+    "answer": "Theo quy định, Mentor Duty diễn ra vào **tối Thứ 4 và Thứ 7 hàng tuần**, tuy nhiên lịch cụ thể có thể thay đổi linh hoạt tùy theo sắp xếp riêng của từng nhóm với Mentor phụ trách [Document 1].",
+    "sources": [
+      "legal/quy-dinh-mentor-duty.md::chunk-2",
+      "legal/quy-dinh-mentor-duty.md::chunk-5",
+      "legal/quy-dinh-mentor-duty.md::chunk-3",
+      "legal/20K-AI-Handbook-ver2.1.md::chunk-40",
+      "legal/20K-AI-Handbook-ver2.1.md::chunk-39"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 1.0,
+    "context_precision": 1.0,
+    "citations_valid": true,
+    "latency_seconds": 11.682
+  },
+  {
+    "id": "sem-01",
+    "case_type": "semantic",
+    "question": "Nhóm cần gặp người hướng dẫn định kỳ vào những buổi nào?",
+    "config": "remote_listwise",
+    "answer": "Theo lịch cố định, Mentor Duty diễn ra vào **tối Thứ 4 và Thứ 7 hàng tuần** (tuy nhiên lịch cụ thể có thể thay đổi linh hoạt tùy theo sắp xếp riêng của từng nhóm với Mentor phụ trách) [Document 1].",
+    "sources": [
+      "legal/quy-dinh-mentor-duty.md::chunk-2",
+      "legal/quy-dinh-mentor-duty.md::chunk-5",
+      "legal/quy-dinh-mentor-duty.md::chunk-3",
+      "legal/quy-dinh-mentor-duty.md::chunk-6",
+      "legal/quy-dinh-mentor-duty.md::chunk-1"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 1.0,
+    "context_precision": 1.0,
+    "citations_valid": true,
+    "latency_seconds": 20.657
+  },
+  {
+    "id": "sem-02",
+    "case_type": "semantic",
+    "question": "Khi cập nhật tiến độ cho mentor, nhóm phải cung cấp những loại thông tin gì?",
+    "config": "A_dense",
+    "answer": "Theo quy định, báo cáo Mentor Duty bắt buộc gồm 5 trường thông tin chuẩn hóa, trong đó có 3 loại thông tin được nêu rõ:\n\n- **done**: Những đầu việc nhóm đã hoàn thành trong giai đoạn vừa qua [Document 1].\n- **doing**: Những công việc nhóm đang tích cực triển khai [Document 1].\n- **blocked**: Những khó khăn, vướng mắc kỹ thuật hoặc nghiệp vụ mà nhóm đang gặp phải và cần hỗ trợ [Document 1].\n\nLưu ý: Context chỉ liệt kê rõ 3 trường thông tin trên, dù có đề cập báo cáo gồm \"5 trường thông tin chuẩn hóa\" [Document 1]. Hai trường còn lại không được nêu trong context, nên không thể xác minh đầy đủ danh sách 5 trường.",
+    "sources": [
+      "legal/quy-dinh-mentor-duty.md::chunk-3",
+      "legal/quy-dinh-mentor-duty.md::chunk-5",
+      "legal/quy-dinh-mentor-duty.md::chunk-1",
+      "legal/quy-dinh-mentor-duty.md::chunk-2",
+      "legal/quy-dinh-mentor-duty.md::chunk-0"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 0.5,
+    "context_recall": 0.6666666666666666,
+    "context_precision": 1.0,
+    "citations_valid": true,
+    "latency_seconds": 9.604
+  },
+  {
+    "id": "sem-02",
+    "case_type": "semantic",
+    "question": "Khi cập nhật tiến độ cho mentor, nhóm phải cung cấp những loại thông tin gì?",
+    "config": "remote_weighted",
+    "answer": "Theo quy định, báo cáo Mentor Duty bắt buộc gồm 5 trường thông tin chuẩn hóa, trong đó có các loại thông tin sau:\n\n- **done**: Những đầu việc nhóm đã hoàn thành trong giai đoạn vừa qua [Document 5].\n- **doing**: Những công việc nhóm đang tích cực triển khai [Document 5].\n- **blocked**: Những khó khăn, vướng mắc kỹ thuật hoặc nghiệp vụ mà nhóm đang gặp phải và cần hỗ trợ [Document 5].\n\nNgoài ra, mục đích của hoạt động báo cáo này là để nhóm cập nhật những gì đã làm được, những khó khăn đang gặp phải và nhận hướng dẫn trực tiếp từ Mentor [Document 1].",
+    "sources": [
+      "legal/quy-dinh-mentor-duty.md::chunk-2",
+      "legal/quy-dinh-mentor-duty.md::chunk-3",
+      "legal/quy-dinh-mentor-duty.md::chunk-5",
+      "legal/quy-dinh-mentor-duty.md::chunk-6",
+      "legal/quy-dinh-mentor-duty.md::chunk-1"
+    ],
+    "faithfulness": 0.5,
+    "answer_relevance": 0.5,
+    "context_recall": 0.6666666666666666,
+    "context_precision": 0.5,
+    "citations_valid": true,
+    "latency_seconds": 3.949
+  },
+  {
+    "id": "sem-02",
+    "case_type": "semantic",
+    "question": "Khi cập nhật tiến độ cho mentor, nhóm phải cung cấp những loại thông tin gì?",
+    "config": "remote_listwise",
+    "answer": "Theo quy định, báo cáo Mentor Duty bắt buộc gồm 5 trường thông tin chuẩn hóa: done, doing, blocked, link và questions [Document 1][Document 5].\n\nCụ thể:\n- **done**: Những đầu việc nhóm đã hoàn thành trong giai đoạn vừa qua [Document 1].\n- **doing**: Những công việc nhóm đang tích cực triển khai [Document 1].\n- **blocked**: Những khó khăn, vướng mắc kỹ thuật hoặc nghiệp vụ mà nhóm đang gặp phải và cần hỗ trợ [Document 1].\n- **link**: Đường dẫn tới sản phẩm, GitHub repository, tài liệu thiết kế hoặc bằng chứng liên quan [Document 5].\n- **questions**: Các câu hỏi cụ thể, trọng tâm mà nhóm muốn trao đổi và xin ý kiến Mentor [Document 5].",
+    "sources": [
+      "legal/quy-dinh-mentor-duty.md::chunk-3",
+      "legal/quy-dinh-mentor-duty.md::chunk-4",
+      "legal/quy-dinh-mentor-duty.md::chunk-2",
+      "legal/quy-dinh-mentor-duty.md::chunk-5",
+      "legal/quy-dinh-mentor-duty.md::chunk-6"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 1.0,
+    "context_precision": 1.0,
+    "citations_valid": true,
+    "latency_seconds": 7.525
+  },
+  {
+    "id": "sem-03",
+    "case_type": "semantic",
+    "question": "Nếu nhóm báo cáo mentor sau buổi trưa thì còn được cộng điểm thưởng không?",
+    "config": "A_dense",
+    "answer": "Không. Theo quy định, nhóm phải nộp báo cáo trước 12h00 trưa của ngày có buổi Mentor Duty để được cộng điểm XP; báo cáo nộp sau 12h00 trưa vẫn được hệ thống ghi nhận nhưng **không được cộng điểm thưởng XP** [Document 1].",
+    "sources": [
+      "legal/quy-dinh-mentor-duty.md::chunk-5",
+      "legal/quy-dinh-mentor-duty.md::chunk-2",
+      "legal/quy-dinh-mentor-duty.md::chunk-3",
+      "legal/quy-dinh-mentor-duty.md::chunk-6",
+      "legal/quy-dinh-mentor-duty.md::chunk-1"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 1.0,
+    "context_precision": 1.0,
+    "citations_valid": true,
+    "latency_seconds": 6.195
+  },
+  {
+    "id": "sem-03",
+    "case_type": "semantic",
+    "question": "Nếu nhóm báo cáo mentor sau buổi trưa thì còn được cộng điểm thưởng không?",
+    "config": "remote_weighted",
+    "answer": "Không. Theo quy định, nhóm phải nộp báo cáo trước 12h00 trưa của ngày có buổi Mentor Duty để được cộng điểm XP; báo cáo nộp sau 12h00 trưa vẫn được hệ thống ghi nhận nhưng **không được cộng điểm thưởng XP** [Document 1].",
+    "sources": [
+      "legal/quy-dinh-mentor-duty.md::chunk-5",
+      "legal/quy-dinh-mentor-duty.md::chunk-2",
+      "legal/quy-dinh-mentor-duty.md::chunk-6",
+      "legal/quy-dinh-mentor-duty.md::chunk-1",
+      "legal/quy-dinh-mentor-duty.md::chunk-3"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 1.0,
+    "context_precision": 1.0,
+    "citations_valid": true,
+    "latency_seconds": 7.485
+  },
+  {
+    "id": "sem-03",
+    "case_type": "semantic",
+    "question": "Nếu nhóm báo cáo mentor sau buổi trưa thì còn được cộng điểm thưởng không?",
+    "config": "remote_listwise",
+    "answer": "Dựa trên context được cung cấp: **Không**, nhóm sẽ không được cộng điểm thưởng XP.\n\nCụ thể, theo Document 1: \"Báo cáo nộp sau 12h00 trưa vẫn được hệ thống ghi nhận nhưng nhóm sẽ không được cộng điểm thưởng XP.\"",
+    "sources": [
+      "legal/quy-dinh-mentor-duty.md::chunk-5",
+      "legal/quy-dinh-mentor-duty.md::chunk-2",
+      "legal/quy-dinh-mentor-duty.md::chunk-1",
+      "legal/quy-dinh-mentor-duty.md::chunk-3",
+      "legal/quy-dinh-mentor-duty.md::chunk-6"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 1.0,
+    "context_precision": 1.0,
+    "citations_valid": false,
+    "latency_seconds": 6.537
+  },
+  {
+    "id": "sem-04",
+    "case_type": "semantic",
+    "question": "Nhóm hackathon cần bao nhiêu người ngoài nhóm xác nhận vấn đề nếu dùng khảo sát?",
+    "config": "A_dense",
+    "answer": "Theo quy chế, nếu dùng khảo sát & phỏng vấn (Đường A), nhóm phải khảo sát **tối thiểu 20 người dùng mục tiêu ngoài nhóm**, trong đó tỷ lệ xác nhận nỗi đau phải đạt **từ 50% trở lên** [Document 1].",
+    "sources": [
+      "legal/quy-che-ai-product-hackathon.md::chunk-6",
+      "legal/quy-che-ai-product-hackathon.md::chunk-10",
+      "legal/quy-che-ai-product-hackathon.md::chunk-9",
+      "news/06_huong_dan_khoi_tao_du_an_template_ai20k.md::chunk-6",
+      "legal/quy-dinh-mentor-duty.md::chunk-3"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 1.0,
+    "context_precision": 1.0,
+    "citations_valid": true,
+    "latency_seconds": 6.154
+  },
+  {
+    "id": "sem-04",
+    "case_type": "semantic",
+    "question": "Nhóm hackathon cần bao nhiêu người ngoài nhóm xác nhận vấn đề nếu dùng khảo sát?",
+    "config": "remote_weighted",
+    "answer": "Theo quy chế, nếu dùng khảo sát & phỏng vấn (Đường A), nhóm phải khảo sát **tối thiểu 20 người dùng mục tiêu ngoài nhóm**, trong đó **tỷ lệ xác nhận nỗi đau phải đạt từ 50% trở lên** [Document 1].",
+    "sources": [
+      "legal/quy-che-ai-product-hackathon.md::chunk-6",
+      "legal/quy-che-ai-product-hackathon.md::chunk-9",
+      "legal/quy-dinh-mentor-duty.md::chunk-3",
+      "legal/quy-che-ai-product-hackathon.md::chunk-3",
+      "legal/quy-che-ai-product-hackathon.md::chunk-10"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 1.0,
+    "context_precision": 1.0,
+    "citations_valid": true,
+    "latency_seconds": 6.067
+  },
+  {
+    "id": "sem-04",
+    "case_type": "semantic",
+    "question": "Nhóm hackathon cần bao nhiêu người ngoài nhóm xác nhận vấn đề nếu dùng khảo sát?",
+    "config": "remote_listwise",
+    "answer": "Theo quy chế, nếu dùng Đường A — Khảo sát & Phỏng vấn, nhóm phải khảo sát **tối thiểu 20 người dùng mục tiêu ngoài nhóm**, trong đó **tỷ lệ xác nhận nỗi đau phải đạt từ 50% trở lên** [Document 1].",
+    "sources": [
+      "legal/quy-che-ai-product-hackathon.md::chunk-6",
+      "legal/quy-che-ai-product-hackathon.md::chunk-10",
+      "legal/quy-che-ai-product-hackathon.md::chunk-9",
+      "legal/quy-che-ai-product-hackathon.md::chunk-2",
+      "legal/quy-che-ai-product-hackathon.md::chunk-3"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 1.0,
+    "context_precision": 1.0,
+    "citations_valid": true,
+    "latency_seconds": 15.869
+  },
+  {
+    "id": "sem-05",
+    "case_type": "semantic",
+    "question": "Ở mốc đầu của hackathon, bản phác thảo ý tưởng phải thể hiện những gì?",
+    "config": "A_dense",
+    "answer": "Ở mốc đầu của hackathon (Checkpoint 1), nhóm phải trình bày bản Canvas 7 dòng gồm: (1) Track đề tài (Track A-E) và tên đề tài đã chọn; (2) Job Executor (vai trò người dùng cụ thể); (3) Nỗi đau trong một câu (Ai - đang làm gì - vướng đâu - hậu quả gì); (4) 1-2 bằng chứng đầu tiên chứng minh nỗi đau có thật; (5) Lát cắt một câu (1 user - 1 việc - 1 quyết định AI - 1 kết quả); (6) Mức độ tự động hóa dự kiến và 1 dòng lý do lựa chọn [Document 2].",
+    "sources": [
+      "news/06_huong_dan_khoi_tao_du_an_template_ai20k.md::chunk-77",
+      "legal/quy-che-ai-product-hackathon.md::chunk-2",
+      "legal/quy-che-ai-product-hackathon.md::chunk-9",
+      "news/06_huong_dan_khoi_tao_du_an_template_ai20k.md::chunk-3",
+      "legal/quy-che-ai-product-hackathon.md::chunk-1"
+    ],
+    "faithfulness": 0.5,
+    "answer_relevance": 0.5,
+    "context_recall": 0.5,
+    "context_precision": 0.3333333333333333,
+    "citations_valid": true,
+    "latency_seconds": 8.388
+  },
+  {
+    "id": "sem-05",
+    "case_type": "semantic",
+    "question": "Ở mốc đầu của hackathon, bản phác thảo ý tưởng phải thể hiện những gì?",
+    "config": "remote_weighted",
+    "answer": "Ở mốc đầu của hackathon (Checkpoint 1), bản phác thảo ý tưởng phải thể hiện **bản Canvas 7 dòng**, bao gồm:\n\n1. Track đề tài (Track A-E) và tên đề tài đã chọn.\n2. Job Executor (vai trò người dùng cụ thể).\n3. Nỗi đau trong một câu (Ai - đang làm gì - vướng đâu - hậu quả gì).\n4. 1-2 bằng chứng đầu tiên chứng minh nỗi đau có thật.\n5. Lát cắt một câu (1 user - 1 việc - 1 quyết định AI - 1 kết quả).\n6. Mức độ tự động hóa dự kiến và 1 dòng lý do lựa chọn.\n\n[Document 1 | Title: quy-che-ai-product-hackathon | Source: quy-che-ai-product-hackathon.md]\n\nNgoài ra, giai đoạn này cũng yêu cầu xác định rõ **Job Executor** (ai trực tiếp gặp vấn đề), **Job Statement** (verb + object + bối cảnh), **giải pháp hiện tại và chỗ thất bại**, và **thu thập bằng chứng nỗi đau thực tế**. [Document 2 | Title: quy-che-ai-product-hackathon | Source: quy-che-ai-product-hackathon.md]",
+    "sources": [
+      "legal/quy-che-ai-product-hackathon.md::chunk-9",
+      "news/06_huong_dan_khoi_tao_du_an_template_ai20k.md::chunk-77",
+      "legal/quy-che-ai-product-hackathon.md::chunk-2",
+      "news/06_huong_dan_khoi_tao_du_an_template_ai20k.md::chunk-3",
+      "legal/quy-che-ai-product-hackathon.md::chunk-1"
+    ],
+    "faithfulness": 0.5,
+    "answer_relevance": 0.5,
+    "context_recall": 0.5,
+    "context_precision": 1.0,
+    "citations_valid": true,
+    "latency_seconds": 3.094
+  },
+  {
+    "id": "sem-05",
+    "case_type": "semantic",
+    "question": "Ở mốc đầu của hackathon, bản phác thảo ý tưởng phải thể hiện những gì?",
+    "config": "remote_listwise",
+    "answer": "Ở mốc đầu của hackathon (Checkpoint 1), bản phác thảo ý tưởng phải thể hiện bản Canvas 7 dòng, bao gồm:\n\n1. Track đề tài (Track A-E) và tên đề tài đã chọn.\n2. Job Executor (vai trò người dùng cụ thể).\n3. Nỗi đau trong một câu (Ai - đang làm gì - vướng đâu - hậu quả gì).\n4. 1-2 bằng chứng đầu tiên chứng minh nỗi đau có thật.\n5. Lát cắt một câu (1 user - 1 việc - 1 quyết định AI - 1 kết quả).\n6. Mức độ tự động hóa dự kiến và 1 dòng lý do lựa chọn.\n\n**Citation:** [Document 1 | Title: quy-che-ai-product-hackathon | Source: quy-che-ai-product-hackathon.md]",
+    "sources": [
+      "legal/quy-che-ai-product-hackathon.md::chunk-9",
+      "legal/quy-che-ai-product-hackathon.md::chunk-2",
+      "legal/quy-che-ai-product-hackathon.md::chunk-1",
+      "legal/quy-che-ai-product-hackathon.md::chunk-0",
+      "legal/quy-dinh-deliverables-demo-day.md::chunk-2"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 0.5,
+    "context_precision": 1.0,
+    "citations_valid": true,
+    "latency_seconds": 5.914
+  },
+  {
+    "id": "sem-06",
+    "case_type": "semantic",
+    "question": "Người học trải qua những chặng nào trong 12 tuần đào tạo?",
+    "config": "A_dense",
+    "answer": "Người học trải qua 03 giai đoạn trong 12 tuần đào tạo: GIAI ĐOẠN 1 (03 TUẦN) Xây dựng nền tảng toàn diện; GIAI ĐOẠN 2 (03 TUẦN) Đào sâu theo định hướng chuyên môn; GIAI ĐOẠN 3 (06 TUẦN) Thực chiến tại doanh nghiệp đối tác [Document 1].",
+    "sources": [
+      "news/01_portal_gioi_thieu_chuong_trinh_ai20k.md::chunk-6",
+      "legal/20K-AI-Handbook-ver2.1.md::chunk-31",
+      "news/03_vingroup_khai_giang_khoa_1.md::chunk-6",
+      "legal/20K-AI-Handbook-ver2.1.md::chunk-41",
+      "legal/20K-AI-Handbook-ver2.1.md::chunk-32"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 1.0,
+    "context_precision": 1.0,
+    "citations_valid": true,
+    "latency_seconds": 3.318
+  },
+  {
+    "id": "sem-06",
+    "case_type": "semantic",
+    "question": "Người học trải qua những chặng nào trong 12 tuần đào tạo?",
+    "config": "remote_weighted",
+    "answer": "Người học trải qua 03 giai đoạn trong 12 tuần đào tạo: Giai đoạn 1 (03 tuần) xây dựng nền tảng toàn diện; Giai đoạn 2 (03 tuần) đào sâu theo định hướng chuyên môn; Giai đoạn 3 (06 tuần) thực chiến tại doanh nghiệp đối tác. [Document 5]\n\nCấu trúc này cũng được mô tả theo mô hình 3+3+6, gồm 3 tuần học nền tảng, 3 tuần mô phỏng thực chiến và 6 tuần làm việc trực tiếp tại doanh nghiệp. [Document 1]",
+    "sources": [
+      "news/03_vingroup_khai_giang_khoa_1.md::chunk-6",
+      "news/01_portal_gioi_thieu_chuong_trinh_ai20k.md::chunk-6",
+      "legal/20K-AI-Handbook-ver2.1.md::chunk-31",
+      "legal/20K-AI-Handbook-ver2.1.md::chunk-41",
+      "legal/20K-AI-Handbook-ver2.1.md::chunk-32"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 1.0,
+    "context_precision": 0.5,
+    "citations_valid": true,
+    "latency_seconds": 2.988
+  },
+  {
+    "id": "sem-06",
+    "case_type": "semantic",
+    "question": "Người học trải qua những chặng nào trong 12 tuần đào tạo?",
+    "config": "remote_listwise",
+    "answer": "Người học trải qua 03 giai đoạn trong 12 tuần đào tạo: GIAI ĐOẠN 1 (03 TUẦN) Xây dựng nền tảng toàn diện; GIAI ĐOẠN 2 (03 TUẦN) Đào sâu theo định hướng chuyên môn; GIAI ĐOẠN 3 (06 TUẦN) Thực chiến tại doanh nghiệp đối tác [Document 4].",
+    "sources": [
+      "legal/20K-AI-Handbook-ver2.1.md::chunk-31",
+      "legal/20K-AI-Handbook-ver2.1.md::chunk-33",
+      "news/03_vingroup_khai_giang_khoa_1.md::chunk-6",
+      "news/01_portal_gioi_thieu_chuong_trinh_ai20k.md::chunk-6",
+      "legal/20K-AI-Handbook-ver2.1.md::chunk-32"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 1.0,
+    "context_precision": 0.25,
+    "citations_valid": true,
+    "latency_seconds": 10.377
+  },
+  {
+    "id": "sem-07",
+    "case_type": "semantic",
+    "question": "Học viên có phải tự trả tiền học và nhận hỗ trợ sinh hoạt bao nhiêu?",
+    "config": "A_dense",
+    "answer": "Dựa trên context được cung cấp:\n\n**Học viên không phải tự trả tiền học** — chương trình tài trợ 100% học phí [Document 1], học viên được miễn học phí [Document 2][Document 3].\n\n**Mức hỗ trợ sinh hoạt:** Học viên nhận trợ cấp **8 triệu đồng/tháng** trong thời gian tham gia chương trình [Document 1][Document 2][Document 3].\n\n**Lưu ý về điều kiện:** Theo Document 1, trợ cấp được nhận khi học viên đáp ứng đầy đủ các yêu cầu: tuân thủ quy định của Thỏa thuận & cam kết tham gia chương trình; duy trì chuyên cần theo quy định và hoàn thành các yêu cầu học tập, đánh giá; tuân thủ quy định học thuật/quản lý sinh viên của VinUni và đơn vị thực tập [Document 1].\n\n**Về chi phí đi lại và ăn ở:** Chương trình **không hỗ trợ** chi phí đi lại và ăn ở; học viên chủ động sắp xếp các chi phí sinh hoạt trong suốt thời gian tham gia chương trình [Document 4][Document 5].",
+    "sources": [
+      "legal/20K-AI-Handbook-ver2.1.md::chunk-63",
+      "news/01_portal_gioi_thieu_chuong_trinh_ai20k.md::chunk-31",
+      "news/01_portal_gioi_thieu_chuong_trinh_ai20k.md::chunk-5",
+      "legal/20K-AI-Handbook-ver2.1.md::chunk-79",
+      "news/02_thong_tin_tuyen_sinh_khoa_co_ban.md::chunk-17"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 1.0,
+    "context_precision": 0.3333333333333333,
+    "citations_valid": true,
+    "latency_seconds": 4.436
+  },
+  {
+    "id": "sem-07",
+    "case_type": "semantic",
+    "question": "Học viên có phải tự trả tiền học và nhận hỗ trợ sinh hoạt bao nhiêu?",
+    "config": "remote_weighted",
+    "answer": "Dựa trên context được cung cấp:\n\n**Về học phí:** Học viên **không phải tự trả tiền học**. Cụ thể, khi tham gia chương trình, học viên được tài trợ 100% học phí [Document 3].\n\n**Về hỗ trợ sinh hoạt:** Học viên nhận **trợ cấp 8 triệu đồng/tháng** trong thời gian 03 tháng tham gia chương trình, theo các điều kiện quy định [Document 3].\n\n**Lưu ý:** Chương trình **không hỗ trợ chi phí đi lại và ăn ở**. Học viên chủ động sắp xếp các chi phí sinh hoạt trong suốt thời gian tham gia chương trình [Document 1][Document 5].",
+    "sources": [
+      "news/01_portal_gioi_thieu_chuong_trinh_ai20k.md::chunk-31",
+      "legal/20K-AI-Handbook-ver2.1.md::chunk-79",
+      "legal/20K-AI-Handbook-ver2.1.md::chunk-64",
+      "legal/20K-AI-Handbook-ver2.1.md::chunk-65",
+      "legal/20K-AI-Handbook-ver2.1.md::chunk-63"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 0.0,
+    "context_precision": 0.0,
+    "citations_valid": true,
+    "latency_seconds": 2.863
+  },
+  {
+    "id": "sem-07",
+    "case_type": "semantic",
+    "question": "Học viên có phải tự trả tiền học và nhận hỗ trợ sinh hoạt bao nhiêu?",
+    "config": "remote_listwise",
+    "answer": "Không, học viên không phải tự trả tiền học. Theo context, học viên được tài trợ 100% học phí [Document 1], [Document 3], [Document 4], [Document 5] và nhận phụ cấp/trợ cấp 8 triệu VND/tháng trong suốt thời gian tham gia chương trình [Document 1], [Document 2], [Document 3], [Document 4], [Document 5].",
+    "sources": [
+      "news/01_portal_gioi_thieu_chuong_trinh_ai20k.md::chunk-5",
+      "legal/20K-AI-Handbook-ver2.1.md::chunk-63",
+      "news/02_thong_tin_tuyen_sinh_khoa_co_ban.md::chunk-17",
+      "news/03_vingroup_khai_giang_khoa_1.md::chunk-15",
+      "news/01_portal_gioi_thieu_chuong_trinh_ai20k.md::chunk-12"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 1.0,
+    "context_precision": 1.0,
+    "citations_valid": true,
+    "latency_seconds": 6.387
+  },
+  {
+    "id": "sem-08",
+    "case_type": "semantic",
+    "question": "Trong thời gian học tại VinUni, được vắng mặt tối đa bao nhiêu buổi?",
+    "config": "A_dense",
+    "answer": "Theo quy định chuyên cần, học viên được phép nghỉ tối đa **04 buổi (sáng hoặc chiều)** trong toàn bộ thời gian học tập tại VinUni (giai đoạn 1 và giai đoạn 2) [Document 1].",
+    "sources": [
+      "legal/20K-AI-Handbook-ver2.1.md::chunk-53",
+      "news/04_ky_thi_danh_gia_nang_luc_3_ngay.md::chunk-4",
+      "news/01_portal_gioi_thieu_chuong_trinh_ai20k.md::chunk-12",
+      "news/05_tuyen_sinh_khoa_2_3.md::chunk-10",
+      "legal/20K-AI-Handbook-ver2.1.md::chunk-55"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 1.0,
+    "context_precision": 1.0,
+    "citations_valid": true,
+    "latency_seconds": 2.239
+  },
+  {
+    "id": "sem-08",
+    "case_type": "semantic",
+    "question": "Trong thời gian học tại VinUni, được vắng mặt tối đa bao nhiêu buổi?",
+    "config": "remote_weighted",
+    "answer": "Theo quy định chuyên cần, học viên được phép nghỉ tối đa **04 buổi (sáng hoặc chiều)** trong toàn bộ thời gian học tập tại VinUni (giai đoạn 1 và giai đoạn 2) [Document 1].",
+    "sources": [
+      "legal/20K-AI-Handbook-ver2.1.md::chunk-53",
+      "news/04_ky_thi_danh_gia_nang_luc_3_ngay.md::chunk-4",
+      "news/01_portal_gioi_thieu_chuong_trinh_ai20k.md::chunk-12",
+      "news/05_tuyen_sinh_khoa_2_3.md::chunk-10",
+      "legal/20K-AI-Handbook-ver2.1.md::chunk-55"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 1.0,
+    "context_precision": 1.0,
+    "citations_valid": true,
+    "latency_seconds": 1.606
+  },
+  {
+    "id": "sem-08",
+    "case_type": "semantic",
+    "question": "Trong thời gian học tại VinUni, được vắng mặt tối đa bao nhiêu buổi?",
+    "config": "remote_listwise",
+    "answer": "Theo quy định chuyên cần, học viên được phép nghỉ tối đa **04 buổi (sáng hoặc chiều)** trong toàn bộ thời gian học tập tại VinUni (giai đoạn 1 và giai đoạn 2) [Document 1].",
+    "sources": [
+      "legal/20K-AI-Handbook-ver2.1.md::chunk-53",
+      "legal/20K-AI-Handbook-ver2.1.md::chunk-68",
+      "legal/20K-AI-Handbook-ver2.1.md::chunk-55",
+      "legal/20K-AI-Handbook-ver2.1.md::chunk-63",
+      "legal/20K-AI-Handbook-ver2.1.md::chunk-47"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 1.0,
+    "context_precision": 1.0,
+    "citations_valid": true,
+    "latency_seconds": 5.841
+  },
+  {
+    "id": "key-01",
+    "case_type": "keyword",
+    "question": "Lệnh /mentor-duty update dùng để làm gì?",
+    "config": "A_dense",
+    "answer": "Theo quy định, lệnh `/mentor-duty update` cho phép chỉnh sửa, cập nhật lại thông tin báo cáo đã nộp trước thời hạn deadline [Document 1].",
+    "sources": [
+      "legal/quy-dinh-mentor-duty.md::chunk-6",
+      "legal/quy-dinh-mentor-duty.md::chunk-0",
+      "legal/quy-dinh-mentor-duty.md::chunk-1",
+      "legal/quy-dinh-mentor-duty.md::chunk-2",
+      "legal/quy-dinh-mentor-duty.md::chunk-3"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 1.0,
+    "context_precision": 1.0,
+    "citations_valid": true,
+    "latency_seconds": 2.034
+  },
+  {
+    "id": "key-01",
+    "case_type": "keyword",
+    "question": "Lệnh /mentor-duty update dùng để làm gì?",
+    "config": "remote_weighted",
+    "answer": "Lệnh `/mentor-duty update` cho phép chỉnh sửa, cập nhật lại thông tin báo cáo đã nộp trước thời hạn deadline [Document 1].",
+    "sources": [
+      "legal/quy-dinh-mentor-duty.md::chunk-6",
+      "legal/quy-dinh-mentor-duty.md::chunk-2",
+      "legal/quy-dinh-mentor-duty.md::chunk-3",
+      "news/06_huong_dan_khoi_tao_du_an_template_ai20k.md::chunk-24",
+      "legal/quy-dinh-mentor-duty.md::chunk-0"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 1.0,
+    "context_precision": 1.0,
+    "citations_valid": true,
+    "latency_seconds": 2.073
+  },
+  {
+    "id": "key-01",
+    "case_type": "keyword",
+    "question": "Lệnh /mentor-duty update dùng để làm gì?",
+    "config": "remote_listwise",
+    "answer": "Lệnh `/mentor-duty update` cho phép chỉnh sửa, cập nhật lại thông tin báo cáo đã nộp trước thời hạn deadline [Document 1].",
+    "sources": [
+      "legal/quy-dinh-mentor-duty.md::chunk-6",
+      "legal/quy-dinh-mentor-duty.md::chunk-3",
+      "legal/quy-dinh-mentor-duty.md::chunk-2",
+      "legal/quy-dinh-mentor-duty.md::chunk-5",
+      "legal/quy-dinh-mentor-duty.md::chunk-1"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 1.0,
+    "context_precision": 1.0,
+    "citations_valid": true,
+    "latency_seconds": 4.996
+  },
+  {
+    "id": "key-02",
+    "case_type": "keyword",
+    "question": "CP4 trong quy chế AI Product Hackathon là mốc gì?",
+    "config": "A_dense",
+    "answer": "Theo quy chế AI Product Hackathon, CP4 là **hạn chốt spec** trong Giai đoạn 2 · Thiết kế & Spec (CP1 → CP4 Hạn chốt spec), và đây là **mốc cố định không thay đổi** [Document 2].",
+    "sources": [
+      "legal/quy-che-ai-product-hackathon.md::chunk-3",
+      "legal/quy-che-ai-product-hackathon.md::chunk-1",
+      "legal/quy-che-ai-product-hackathon.md::chunk-2",
+      "legal/quy-che-ai-product-hackathon.md::chunk-0",
+      "legal/20K-AI-Handbook-ver2.1.md::chunk-13"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 1.0,
+    "context_precision": 0.3333333333333333,
+    "citations_valid": true,
+    "latency_seconds": 3.295
+  },
+  {
+    "id": "key-02",
+    "case_type": "keyword",
+    "question": "CP4 trong quy chế AI Product Hackathon là mốc gì?",
+    "config": "remote_weighted",
+    "answer": "Theo quy chế, CP4 là **hạn chốt spec** — mốc cố định không thay đổi, nằm trong Giai đoạn 2 · Thiết kế & Spec (CP1 → CP4 Hạn chốt spec) [Document 5].",
+    "sources": [
+      "legal/quy-che-ai-product-hackathon.md::chunk-1",
+      "legal/quy-che-ai-product-hackathon.md::chunk-2",
+      "legal/quy-che-ai-product-hackathon.md::chunk-0",
+      "news/01_portal_gioi_thieu_chuong_trinh_ai20k.md::chunk-24",
+      "news/01_portal_gioi_thieu_chuong_trinh_ai20k.md::chunk-19"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 1.0,
+    "context_precision": 0.5,
+    "citations_valid": true,
+    "latency_seconds": 3.003
+  },
+  {
+    "id": "key-02",
+    "case_type": "keyword",
+    "question": "CP4 trong quy chế AI Product Hackathon là mốc gì?",
+    "config": "remote_listwise",
+    "answer": "Theo quy chế, CP4 là **hạn chốt spec** — mốc cố định không thay đổi, nằm trong Giai đoạn 2 · Thiết kế & Spec (CP1 → CP4 Hạn chốt spec) [Document 5].",
+    "sources": [
+      "legal/quy-che-ai-product-hackathon.md::chunk-3",
+      "legal/quy-che-ai-product-hackathon.md::chunk-2",
+      "legal/quy-che-ai-product-hackathon.md::chunk-1",
+      "legal/quy-che-ai-product-hackathon.md::chunk-0",
+      "news/01_portal_gioi_thieu_chuong_trinh_ai20k.md::chunk-24"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 1.0,
+    "context_precision": 0.5,
+    "citations_valid": true,
+    "latency_seconds": 7.282
+  },
+  {
+    "id": "key-03",
+    "case_type": "keyword",
+    "question": "Deliverable #6 của Demo Day là gì và dài bao lâu?",
+    "config": "A_dense",
+    "answer": "Deliverable #6 là Video Demo, dài 3-5 phút [Document 4].",
+    "sources": [
+      "legal/quy-dinh-deliverables-demo-day.md::chunk-0",
+      "legal/quy-dinh-deliverables-demo-day.md::chunk-1",
+      "legal/quy-dinh-deliverables-demo-day.md::chunk-2",
+      "legal/quy-dinh-deliverables-demo-day.md::chunk-5",
+      "legal/quy-che-ai-product-hackathon.md::chunk-4"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 1.0,
+    "context_precision": 0.25,
+    "citations_valid": true,
+    "latency_seconds": 9.39
+  },
+  {
+    "id": "key-03",
+    "case_type": "keyword",
+    "question": "Deliverable #6 của Demo Day là gì và dài bao lâu?",
+    "config": "remote_weighted",
+    "answer": "Deliverable #6 là **Video Demo** — video quay màn hình thời lượng **3-5 phút** giới thiệu nhóm, trình diễn use case chính của AI Agent, giải thích luồng xử lý kiến trúc và minh họa tình huống xử lý biên (edge cases), được upload lên YouTube (unlisted) [Document 5].",
+    "sources": [
+      "legal/quy-dinh-deliverables-demo-day.md::chunk-1",
+      "legal/quy-dinh-deliverables-demo-day.md::chunk-5",
+      "legal/quy-dinh-deliverables-demo-day.md::chunk-9",
+      "news/06_huong_dan_khoi_tao_du_an_template_ai20k.md::chunk-17",
+      "legal/quy-dinh-deliverables-demo-day.md::chunk-0"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 1.0,
+    "context_precision": 0.5,
+    "citations_valid": true,
+    "latency_seconds": 13.78
+  },
+  {
+    "id": "key-03",
+    "case_type": "keyword",
+    "question": "Deliverable #6 của Demo Day là gì và dài bao lâu?",
+    "config": "remote_listwise",
+    "answer": "Deliverable #6 là **Video Demo**: video quay màn hình giới thiệu nhóm, trình diễn use case chính của AI Agent, giải thích luồng xử lý kiến trúc và minh họa tình huống xử lý biên (edge cases), với **thời lượng 3-5 phút**, upload YouTube (unlisted) [Document 1].",
+    "sources": [
+      "legal/quy-dinh-deliverables-demo-day.md::chunk-5",
+      "legal/quy-dinh-deliverables-demo-day.md::chunk-9",
+      "legal/quy-dinh-deliverables-demo-day.md::chunk-2",
+      "legal/quy-dinh-deliverables-demo-day.md::chunk-6",
+      "legal/quy-dinh-deliverables-demo-day.md::chunk-1"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 1.0,
+    "context_precision": 1.0,
+    "citations_valid": true,
+    "latency_seconds": 3.616
+  },
+  {
+    "id": "key-04",
+    "case_type": "keyword",
+    "question": "Kỳ thi đầu vào 7–9/3 có khoảng bao nhiêu thí sinh?",
+    "config": "A_dense",
+    "answer": "Kỳ thi đầu vào từ ngày 7–9/3 có gần 1.200 thí sinh từ khắp cả nước tham dự [Document 1].",
+    "sources": [
+      "news/04_ky_thi_danh_gia_nang_luc_3_ngay.md::chunk-4",
+      "news/02_thong_tin_tuyen_sinh_khoa_co_ban.md::chunk-15",
+      "news/03_vingroup_khai_giang_khoa_1.md::chunk-5",
+      "news/05_tuyen_sinh_khoa_2_3.md::chunk-8",
+      "news/05_tuyen_sinh_khoa_2_3.md::chunk-2"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 1.0,
+    "context_precision": 1.0,
+    "citations_valid": true,
+    "latency_seconds": 9.004
+  },
+  {
+    "id": "key-04",
+    "case_type": "keyword",
+    "question": "Kỳ thi đầu vào 7–9/3 có khoảng bao nhiêu thí sinh?",
+    "config": "remote_weighted",
+    "answer": "Kỳ thi đầu vào từ ngày 7–9/3 có gần 1.200 thí sinh từ khắp cả nước tham dự [Document 1].",
+    "sources": [
+      "news/04_ky_thi_danh_gia_nang_luc_3_ngay.md::chunk-4",
+      "news/02_thong_tin_tuyen_sinh_khoa_co_ban.md::chunk-15",
+      "news/01_portal_gioi_thieu_chuong_trinh_ai20k.md::chunk-14",
+      "news/05_tuyen_sinh_khoa_2_3.md::chunk-8",
+      "news/04_ky_thi_danh_gia_nang_luc_3_ngay.md::chunk-3"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 1.0,
+    "context_precision": 1.0,
+    "citations_valid": true,
+    "latency_seconds": 5.284
+  },
+  {
+    "id": "key-04",
+    "case_type": "keyword",
+    "question": "Kỳ thi đầu vào 7–9/3 có khoảng bao nhiêu thí sinh?",
+    "config": "remote_listwise",
+    "answer": "Kỳ thi đầu vào từ 7–9/3 có gần 1.200 thí sinh từ khắp cả nước tham dự [Document 1].",
+    "sources": [
+      "news/04_ky_thi_danh_gia_nang_luc_3_ngay.md::chunk-4",
+      "news/04_ky_thi_danh_gia_nang_luc_3_ngay.md::chunk-3",
+      "news/04_ky_thi_danh_gia_nang_luc_3_ngay.md::chunk-6",
+      "news/02_thong_tin_tuyen_sinh_khoa_co_ban.md::chunk-15",
+      "news/05_tuyen_sinh_khoa_2_3.md::chunk-4"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 1.0,
+    "context_precision": 1.0,
+    "citations_valid": true,
+    "latency_seconds": 14.022
+  },
+  {
+    "id": "multi-01",
+    "case_type": "multi_source",
+    "question": "Khóa đầu tiên có bao nhiêu học viên, còn bài viết tuyển sinh Khóa 2 và 3 nêu mức trợ cấp nào?",
+    "config": "A_dense",
+    "answer": "Khóa đầu tiên có 500 học viên — \"500 học viên khóa đầu tiên có nền tảng đa dạng từ công nghệ, kỹ thuật đến kinh doanh\" [Document 1]. \n\nVề bài viết tuyển sinh Khóa 2 và 3, context được cung cấp chỉ nêu rằng chương trình \"tiếp tục mở đơn tuyển sinh Khóa 2 & 3 với mô hình đào tạo tinh gọn, tốc độ... cùng cơ hội việc làm với mức lương đặc biệt hấp dẫn tỷ lệ thuận với năng lực thực chiến\" [Document 4], nhưng **không nêu mức trợ cấp cụ thể**. \n\nThông tin về trợ cấp 8 triệu đồng/tháng trong 03 tháng xuất hiện trong Document 2 (20K-AI-Handbook), không phải trong bài viết tuyển sinh Khóa 2 và 3. Do đó, tôi không thể xác minh mức trợ cấp được nêu trong bài tuyển sinh Khóa 2 và 3 dựa trên context này.",
+    "sources": [
+      "news/03_vingroup_khai_giang_khoa_1.md::chunk-5",
+      "news/02_thong_tin_tuyen_sinh_khoa_co_ban.md::chunk-15",
+      "legal/20K-AI-Handbook-ver2.1.md::chunk-63",
+      "news/05_tuyen_sinh_khoa_2_3.md::chunk-4",
+      "news/03_vingroup_khai_giang_khoa_1.md::chunk-14"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 0.5,
+    "context_recall": 0.0,
+    "context_precision": 0.0,
+    "citations_valid": true,
+    "latency_seconds": 15.353
+  },
+  {
+    "id": "multi-01",
+    "case_type": "multi_source",
+    "question": "Khóa đầu tiên có bao nhiêu học viên, còn bài viết tuyển sinh Khóa 2 và 3 nêu mức trợ cấp nào?",
+    "config": "remote_weighted",
+    "answer": "Khóa đầu tiên có 500 học viên — \"500 học viên khóa đầu tiên có nền tảng đa dạng từ công nghệ, kỹ thuật đến kinh doanh\" [Document 4]. Bài viết tuyển sinh Khóa 2 và 3 nêu mức trợ cấp là 8 triệu VND/tháng — \"Được tài trợ 100% học phí và nhận phụ cấp 8 triệu VND/tháng trong suốt thời gian tham gia chương trình\" [Document 2].",
+    "sources": [
+      "news/05_tuyen_sinh_khoa_2_3.md::chunk-4",
+      "news/05_tuyen_sinh_khoa_2_3.md::chunk-8",
+      "news/05_tuyen_sinh_khoa_2_3.md::chunk-10",
+      "news/03_vingroup_khai_giang_khoa_1.md::chunk-5",
+      "news/02_thong_tin_tuyen_sinh_khoa_co_ban.md::chunk-15"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 0.5,
+    "context_precision": 0.3333333333333333,
+    "citations_valid": true,
+    "latency_seconds": 9.16
+  },
+  {
+    "id": "multi-01",
+    "case_type": "multi_source",
+    "question": "Khóa đầu tiên có bao nhiêu học viên, còn bài viết tuyển sinh Khóa 2 và 3 nêu mức trợ cấp nào?",
+    "config": "remote_listwise",
+    "answer": "Khóa đầu tiên có 500 học viên tiên phong [Document 1]. Bài viết tuyển sinh Khóa 2 và 3 nêu mức phụ cấp 8 triệu VND/tháng trong suốt thời gian tham gia chương trình [Document 2].",
+    "sources": [
+      "news/05_tuyen_sinh_khoa_2_3.md::chunk-4",
+      "news/03_vingroup_khai_giang_khoa_1.md::chunk-5",
+      "news/05_tuyen_sinh_khoa_2_3.md::chunk-10",
+      "news/01_portal_gioi_thieu_chuong_trinh_ai20k.md::chunk-12",
+      "legal/20K-AI-Handbook-ver2.1.md::chunk-63"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 0.5,
+    "context_precision": 0.3333333333333333,
+    "citations_valid": true,
+    "latency_seconds": 35.823
+  },
+  {
+    "id": "multi-02",
+    "case_type": "multi_source",
+    "question": "Theo hai quy định về hackathon và Demo Day, nhóm cần bao nhiêu willing users ở CP1 và phải nộp tổng cộng bao nhiêu deliverables?",
+    "config": "A_dense",
+    "answer": "Theo quy chế AI Product Hackathon, nhóm cần **ít nhất 3 người dùng sẵn sàng thử nghiệm (willing users)** [Document 4]. Theo quy định về Deliverables Demo Day, mỗi đội phải nộp **đầy đủ 10 deliverables** [Document 1][Document 5].",
+    "sources": [
+      "legal/quy-dinh-deliverables-demo-day.md::chunk-2",
+      "legal/quy-dinh-deliverables-demo-day.md::chunk-1",
+      "legal/quy-dinh-deliverables-demo-day.md::chunk-0",
+      "legal/quy-che-ai-product-hackathon.md::chunk-10",
+      "legal/quy-che-ai-product-hackathon.md::chunk-2"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 1.0,
+    "context_precision": 0.75,
+    "citations_valid": true,
+    "latency_seconds": 5.063
+  },
+  {
+    "id": "multi-02",
+    "case_type": "multi_source",
+    "question": "Theo hai quy định về hackathon và Demo Day, nhóm cần bao nhiêu willing users ở CP1 và phải nộp tổng cộng bao nhiêu deliverables?",
+    "config": "remote_weighted",
+    "answer": "Không thể xác minh đầy đủ vì context được cung cấp không nêu số lượng willing users cần có ở CP1.\n\nTheo context hiện có:\n- Về deliverables: mỗi đội phải nộp đầy đủ **10 deliverables** cho sự kiện Demo Day; hoàn thành đủ **10/10 deliverables** là điều kiện tiên quyết để đạt điểm tối đa ở tiêu chí 'Hoàn thành deliverables' [Document 3].\n- Về giai đoạn Demo & Nộp (CP5 → CP6): cần chuẩn bị bài thuyết trình, quay video demo, đóng gói toàn bộ mã nguồn và tài liệu nghiệm thu theo đúng thời hạn quy định [Document 2].\n\nTuy nhiên, context không có thông tin về **số lượng willing users ở CP1**, nên không thể xác minh phần này.",
+    "sources": [
+      "legal/quy-dinh-deliverables-demo-day.md::chunk-1",
+      "legal/quy-dinh-mentor-duty.md::chunk-5",
+      "legal/quy-che-ai-product-hackathon.md::chunk-4",
+      "legal/quy-dinh-deliverables-demo-day.md::chunk-0",
+      "legal/quy-dinh-deliverables-demo-day.md::chunk-2"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 0.5,
+    "context_recall": 0.5,
+    "context_precision": 0.2,
+    "citations_valid": true,
+    "latency_seconds": 5.228
+  },
+  {
+    "id": "multi-02",
+    "case_type": "multi_source",
+    "question": "Theo hai quy định về hackathon và Demo Day, nhóm cần bao nhiêu willing users ở CP1 và phải nộp tổng cộng bao nhiêu deliverables?",
+    "config": "remote_listwise",
+    "answer": "Theo quy định, nhóm cần **ít nhất 3 người dùng sẵn sàng thử nghiệm (willing users)** [Document 1] và phải nộp tổng cộng **10 deliverables** cho Demo Day [Document 5].",
+    "sources": [
+      "legal/quy-che-ai-product-hackathon.md::chunk-10",
+      "legal/quy-dinh-deliverables-demo-day.md::chunk-2",
+      "legal/quy-che-ai-product-hackathon.md::chunk-2",
+      "legal/quy-dinh-deliverables-demo-day.md::chunk-1",
+      "legal/quy-dinh-deliverables-demo-day.md::chunk-0"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 1.0,
+    "context_precision": 1.0,
+    "citations_valid": true,
+    "latency_seconds": 15.553
+  },
+  {
+    "id": "ref-01",
+    "case_type": "refusal",
+    "question": "Ai là người đạt điểm cao nhất kỳ thi đầu vào Khóa 1?",
+    "config": "A_dense",
+    "answer": "Không đủ thông tin để xác minh. Context được cung cấp không đề cập đến người đạt điểm cao nhất kỳ thi đầu vào Khóa 1.",
+    "sources": [
+      "news/03_vingroup_khai_giang_khoa_1.md::chunk-14",
+      "news/03_vingroup_khai_giang_khoa_1.md::chunk-5",
+      "news/05_tuyen_sinh_khoa_2_3.md::chunk-12",
+      "news/02_thong_tin_tuyen_sinh_khoa_co_ban.md::chunk-15",
+      "news/01_portal_gioi_thieu_chuong_trinh_ai20k.md::chunk-39"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 1.0,
+    "context_precision": 1.0,
+    "citations_valid": true,
+    "latency_seconds": 3.393
+  },
+  {
+    "id": "ref-01",
+    "case_type": "refusal",
+    "question": "Ai là người đạt điểm cao nhất kỳ thi đầu vào Khóa 1?",
+    "config": "remote_weighted",
+    "answer": "Không đủ thông tin để xác minh. Context được cung cấp không đề cập đến người đạt điểm cao nhất kỳ thi đầu vào Khóa 1.",
+    "sources": [
+      "news/02_thong_tin_tuyen_sinh_khoa_co_ban.md::chunk-15",
+      "news/03_vingroup_khai_giang_khoa_1.md::chunk-14",
+      "news/03_vingroup_khai_giang_khoa_1.md::chunk-5",
+      "news/05_tuyen_sinh_khoa_2_3.md::chunk-12",
+      "news/01_portal_gioi_thieu_chuong_trinh_ai20k.md::chunk-39"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 1.0,
+    "context_precision": 1.0,
+    "citations_valid": true,
+    "latency_seconds": 8.221
+  },
+  {
+    "id": "ref-01",
+    "case_type": "refusal",
+    "question": "Ai là người đạt điểm cao nhất kỳ thi đầu vào Khóa 1?",
+    "config": "remote_listwise",
+    "answer": "Không thể xác minh từ context được cung cấp. Các tài liệu không đề cập đến danh tính hoặc thông tin của người đạt điểm cao nhất kỳ thi đầu vào Khóa 1.",
+    "sources": [
+      "news/04_ky_thi_danh_gia_nang_luc_3_ngay.md::chunk-3",
+      "news/04_ky_thi_danh_gia_nang_luc_3_ngay.md::chunk-4",
+      "news/03_vingroup_khai_giang_khoa_1.md::chunk-5",
+      "news/02_thong_tin_tuyen_sinh_khoa_co_ban.md::chunk-14",
+      "news/05_tuyen_sinh_khoa_2_3.md::chunk-8"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 1.0,
+    "context_precision": 1.0,
+    "citations_valid": true,
+    "latency_seconds": 9.356
+  },
+  {
+    "id": "ref-02",
+    "case_type": "refusal",
+    "question": "Lịch khai giảng chính xác của Khóa 9 năm 2027 là ngày nào?",
+    "config": "A_dense",
+    "answer": "Không thể xác minh từ context được cung cấp. Context không chứa thông tin về lịch khai giảng của Khóa 9 năm 2027. Các tài liệu chỉ đề cập đến Khóa 1–8 với thời gian khai giảng từ 02/04/2026 đến tháng 11/2026 [Document 1], [Document 3], [Document 5].",
+    "sources": [
+      "news/05_tuyen_sinh_khoa_2_3.md::chunk-9",
+      "news/02_thong_tin_tuyen_sinh_khoa_co_ban.md::chunk-15",
+      "news/03_vingroup_khai_giang_khoa_1.md::chunk-14",
+      "legal/20K-AI-Handbook-ver2.1.md::chunk-39",
+      "news/01_portal_gioi_thieu_chuong_trinh_ai20k.md::chunk-39"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 1.0,
+    "context_precision": 1.0,
+    "citations_valid": true,
+    "latency_seconds": 3.807
+  },
+  {
+    "id": "ref-02",
+    "case_type": "refusal",
+    "question": "Lịch khai giảng chính xác của Khóa 9 năm 2027 là ngày nào?",
+    "config": "remote_weighted",
+    "answer": "Không thể xác minh từ context được cung cấp. Context không chứa thông tin về lịch khai giảng của Khóa 9 năm 2027. Các tài liệu chỉ đề cập đến Khóa 2, 3, 4, 5, 6, 7, 8 trong năm 2026 [Document 1], Khóa V với thời gian khai giảng 05/11/2026 [Document 3], và các khóa I, II, III, IV với ngày khai giảng cụ thể trong năm 2026 [Document 5]. Không có tài liệu nào đề cập đến Khóa 9 hoặc năm 2027.",
+    "sources": [
+      "news/05_tuyen_sinh_khoa_2_3.md::chunk-9",
+      "news/01_portal_gioi_thieu_chuong_trinh_ai20k.md::chunk-39",
+      "news/05_tuyen_sinh_khoa_2_3.md::chunk-8",
+      "news/01_portal_gioi_thieu_chuong_trinh_ai20k.md::chunk-40",
+      "news/02_thong_tin_tuyen_sinh_khoa_co_ban.md::chunk-15"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 1.0,
+    "context_precision": 1.0,
+    "citations_valid": true,
+    "latency_seconds": 6.444
+  },
+  {
+    "id": "ref-02",
+    "case_type": "refusal",
+    "question": "Lịch khai giảng chính xác của Khóa 9 năm 2027 là ngày nào?",
+    "config": "remote_listwise",
+    "answer": "Không thể xác minh từ context được cung cấp. Các tài liệu chỉ đề cập lịch khai giảng dự kiến của Khóa 2, 3, 4, 5, 6, 7, 8 trong năm 2026 [Document 1], Khóa V với ngày khai giảng dự kiến 05/11/2026 [Document 2], và các khóa I–IV với ngày khai giảng cụ thể trong năm 2026 [Document 5]. Không có thông tin nào về Khóa 9 năm 2027.",
+    "sources": [
+      "news/05_tuyen_sinh_khoa_2_3.md::chunk-9",
+      "news/01_portal_gioi_thieu_chuong_trinh_ai20k.md::chunk-39",
+      "news/02_thong_tin_tuyen_sinh_khoa_co_ban.md::chunk-15",
+      "news/02_thong_tin_tuyen_sinh_khoa_co_ban.md::chunk-16",
+      "news/05_tuyen_sinh_khoa_2_3.md::chunk-8"
+    ],
+    "faithfulness": 1.0,
+    "answer_relevance": 1.0,
+    "context_recall": 1.0,
+    "context_precision": 1.0,
+    "citations_valid": true,
+    "latency_seconds": 12.603
+  }
+]

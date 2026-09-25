@@ -28,7 +28,11 @@ TOP_P = 0.9
 TEMPERATURE = 0.3
 
 LLM_PROVIDER = os.getenv("LLM_PROVIDER", "gemini")
-LLM_MODEL = os.getenv("LLM_MODEL") or ("gemini-3.5-flash-lite" if LLM_PROVIDER == "gemini" else "gpt-4o-mini")
+LLM_MODEL = os.getenv("LLM_MODEL") or (
+    "gemini-3.5-flash-lite" if LLM_PROVIDER == "gemini"
+    else "deepseek-flash" if LLM_PROVIDER == "deepseek"
+    else "gpt-4o-mini"
+)
 
 SAFE_REFUSAL_ANSWER = "Tôi không thể xác minh thông tin này từ nguồn hiện có."
 
@@ -100,7 +104,7 @@ def verify_citations(answer: str, num_documents: int) -> bool:
 
 
 def call_llm(system_prompt: str, user_message: str) -> str:
-    """Gọi OpenAI, Gemini hoặc Anthropic theo cấu hình."""
+    """Gọi OpenAI, Gemini, Anthropic hoặc DeepSeek theo cấu hình."""
     # TODO: Dispatch theo LLM_PROVIDER.
     #
     # - openai    -> OPENAI_API_KEY
@@ -108,6 +112,20 @@ def call_llm(system_prompt: str, user_message: str) -> str:
     # - anthropic -> ANTHROPIC_API_KEY
     #
     # Dùng LLM_MODEL và trả về text thuần cho cả ba nhánh.
+    if LLM_PROVIDER == "deepseek":
+        from openai import OpenAI
+        api_key = os.getenv("DeepSeek_API_KEY") or os.getenv("DEEPSEEK_API_KEY")
+        if not api_key:
+            raise ValueError("DeepSeek_API_KEY is not configured")
+        client = OpenAI(api_key=api_key, base_url="https://api.deepseek.com")
+        completion = client.chat.completions.create(
+            model=LLM_MODEL,
+            messages=[{"role": "system", "content": system_prompt}, {"role": "user", "content": user_message}],
+            temperature=TEMPERATURE,
+            max_tokens=1024,
+            extra_body={"thinking": {"type": "disabled"}},
+        )
+        return completion.choices[0].message.content or ""
     if LLM_PROVIDER == "openai":
         from openai import OpenAI
         api_key = os.getenv("OPENAI_API_KEY")

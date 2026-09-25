@@ -1,0 +1,66 @@
+[
+  {
+    "id": "sem-01", "case_type": "semantic", "question": "Nhóm cần gặp người hướng dẫn định kỳ vào những buổi nào?", "expected_answer": "Mentor Duty thường diễn ra tối thứ Tư và thứ Bảy hằng tuần; lịch cụ thể có thể đổi theo sắp xếp của nhóm và Mentor.",
+    "expected_context": ["Lịch cố định: Diễn ra vào tối Thứ 4 và Thứ 7 hàng tuần"], "expected_sources": ["quy-dinh-mentor-duty.md"]
+  },
+  {
+    "id": "sem-02", "case_type": "semantic", "question": "Khi cập nhật tiến độ cho mentor, nhóm phải cung cấp những loại thông tin gì?", "expected_answer": "Báo cáo Mentor Duty cần 5 trường: done, doing, blocked, link và questions.",
+    "expected_context": ["Báo cáo bắt buộc gồm 5 trường thông tin chuẩn hóa", "* done:", "* doing:", "* blocked:", "* link:", "* questions:"], "expected_sources": ["quy-dinh-mentor-duty.md"]
+  },
+  {
+    "id": "sem-03", "case_type": "semantic", "question": "Nếu nhóm báo cáo mentor sau buổi trưa thì còn được cộng điểm thưởng không?", "expected_answer": "Không. Nộp sau 12h trưa ngày có Mentor Duty vẫn được ghi nhận nhưng không được cộng XP.",
+    "expected_context": ["Báo cáo nộp sau 12h00 trưa vẫn được hệ thống ghi nhận nhưng nhóm sẽ không được cộng điểm thưởng XP"], "expected_sources": ["quy-dinh-mentor-duty.md"]
+  },
+  {
+    "id": "sem-04", "case_type": "semantic", "question": "Nhóm hackathon cần bao nhiêu người ngoài nhóm xác nhận vấn đề nếu dùng khảo sát?", "expected_answer": "Cần khảo sát tối thiểu 20 người dùng mục tiêu ngoài nhóm, trong đó ít nhất 50% xác nhận nỗi đau.",
+    "expected_context": ["Tối thiểu 20 người dùng mục tiêu ngoài nhóm tham gia khảo sát, trong đó tỷ lệ xác nhận nỗi đau phải đạt từ 50% trở lên"], "expected_sources": ["quy-che-ai-product-hackathon.md"]
+  },
+  {
+    "id": "sem-05", "case_type": "semantic", "question": "Ở mốc đầu của hackathon, bản phác thảo ý tưởng phải thể hiện những gì?", "expected_answer": "Canvas CP1 có 7 dòng: track và tên đề tài, Job Executor, nỗi đau, 1–2 bằng chứng, lát cắt giải pháp, mức tự động hóa và lý do, ít nhất 3 willing users cùng phân công nhiệm vụ.",
+    "expected_context": ["bản Canvas 7 dòng gồm:", "Ít nhất 3 người dùng sẵn sàng thử nghiệm"], "expected_sources": ["quy-che-ai-product-hackathon.md"]
+  },
+  {
+    "id": "sem-06", "case_type": "semantic", "question": "Người học trải qua những chặng nào trong 12 tuần đào tạo?", "expected_answer": "Chương trình gồm 3 tuần nền tảng, 3 tuần đào sâu hoặc mô phỏng theo chuyên môn và 6 tuần thực chiến tại doanh nghiệp.",
+    "expected_context": ["GIAI ĐOẠN 1 (03 TUẦN) Xây dựng nền tảng toàn diện", "GIAI ĐOẠN 2 (03 TUẦN) Đào sâu theo định hướng chuyên môn", "GIAI ĐOẠN 3 (06 TUẦN) Thực chiến tại doanh nghiệp đối tác"], "expected_sources": ["01_portal_gioi_thieu_chuong_trinh_ai20k.md"]
+  },
+  {
+    "id": "sem-07", "case_type": "semantic", "question": "Học viên có phải tự trả tiền học và nhận hỗ trợ sinh hoạt bao nhiêu?", "expected_answer": "Học viên được tài trợ 100% học phí và hỗ trợ 8 triệu đồng mỗi tháng trong thời gian tham gia chương trình.",
+    "expected_context": ["Tài trợ 100% học phí, hỗ trợ 8 triệu đồng/tháng"], "expected_sources": ["01_portal_gioi_thieu_chuong_trinh_ai20k.md"]
+  },
+  {
+    "id": "sem-08", "case_type": "semantic", "question": "Trong thời gian học tại VinUni, được vắng mặt tối đa bao nhiêu buổi?", "expected_answer": "Học viên được nghỉ tối đa 4 buổi sáng hoặc chiều trong giai đoạn 1 và 2 tại VinUni, và phải được Giám đốc Chương trình duyệt trước.",
+    "expected_context": ["Học viên được phép nghỉ tối đa 04 buổi", "Giám đốc Chương trình phê duyệt trước khi"], "expected_sources": ["20K-AI-Handbook-ver2.1.md"]
+  },
+  {
+    "id": "key-01", "case_type": "keyword", "question": "Lệnh /mentor-duty update dùng để làm gì?", "expected_answer": "Lệnh /mentor-duty update cho phép chỉnh sửa báo cáo Mentor Duty đã nộp trước thời hạn deadline.",
+    "expected_context": ["/mentor-duty update: Cho phép chỉnh sửa, cập nhật lại thông tin báo cáo đã nộp trước thời hạn deadline"], "expected_sources": ["quy-dinh-mentor-duty.md"]
+  },
+  {
+    "id": "key-02", "case_type": "keyword", "question": "CP4 trong quy chế AI Product Hackathon là mốc gì?", "expected_answer": "CP4 là hạn chốt Product Spec cố định, không thay đổi.",
+    "expected_context": ["Hạn chốt spec tại CP4 là mốc cố định không thay đổi"], "expected_sources": ["quy-che-ai-product-hackathon.md"]
+  },
+  {
+    "id": "key-03", "case_type": "keyword", "question": "Deliverable #6 của Demo Day là gì và dài bao lâu?", "expected_answer": "Deliverable #6 là video demo dài 3–5 phút, đăng YouTube ở chế độ unlisted.",
+    "expected_context": ["6. Video Demo: Video quay màn hình thời lượng 3-5 phút"], "expected_sources": ["quy-dinh-deliverables-demo-day.md"]
+  },
+  {
+    "id": "key-04", "case_type": "keyword", "question": "Kỳ thi đầu vào 7–9/3 có khoảng bao nhiêu thí sinh?", "expected_answer": "Gần 1.200 thí sinh đến VinUni trong ba ngày 7–9/3.",
+    "expected_context": ["Trong 03 ngày từ 7-9/3, VinUni vinh dự chào đón gần 1.200 thí sinh"], "expected_sources": ["04_ky_thi_danh_gia_nang_luc_3_ngay.md"]
+  },
+  {
+    "id": "multi-01", "case_type": "multi_source", "question": "Khóa đầu tiên có bao nhiêu học viên, còn bài viết tuyển sinh Khóa 2 và 3 nêu mức trợ cấp nào?", "expected_answer": "Khóa đầu tiên có 500 học viên; bài tuyển sinh Khóa 2 và 3 nêu trợ cấp 8 triệu đồng mỗi tháng.",
+    "expected_context": ["với 500 học viên tham gia", "nhận phụ cấp 8 triệu VND/tháng"], "expected_sources": ["03_vingroup_khai_giang_khoa_1.md", "05_tuyen_sinh_khoa_2_3.md"]
+  },
+  {
+    "id": "multi-02", "case_type": "multi_source", "question": "Theo hai quy định về hackathon và Demo Day, nhóm cần bao nhiêu willing users ở CP1 và phải nộp tổng cộng bao nhiêu deliverables?", "expected_answer": "Canvas CP1 cần ít nhất 3 willing users; Demo Day yêu cầu 10 deliverables.",
+    "expected_context": ["Ít nhất 3 người dùng sẵn sàng thử nghiệm", "mỗi đội nộp đầy đủ 10 deliverables"], "expected_sources": ["quy-che-ai-product-hackathon.md", "quy-dinh-deliverables-demo-day.md"]
+  },
+  {
+    "id": "ref-01", "case_type": "refusal", "question": "Ai là người đạt điểm cao nhất kỳ thi đầu vào Khóa 1?", "expected_answer": "Không thể xác minh người đạt điểm cao nhất từ tài liệu hiện có.",
+    "expected_context": [], "expected_sources": []
+  },
+  {
+    "id": "ref-02", "case_type": "refusal", "question": "Lịch khai giảng chính xác của Khóa 9 năm 2027 là ngày nào?", "expected_answer": "Không thể xác minh ngày khai giảng Khóa 9 năm 2027 từ tài liệu hiện có.",
+    "expected_context": [], "expected_sources": []
+  }
+]
