@@ -67,7 +67,10 @@ def render_chat_page(top_k: int = 5) -> None:
         content = message.get("content", "")
         sources = message.get("sources") or []
         safe_refusal = message.get("safe_refusal", False)
-        render_message(role, content, sources=sources, safe_refusal=safe_refusal)
+        render_message(
+            role, content, sources=sources, safe_refusal=safe_refusal,
+            retrieval_query=message.get("retrieval_query") if message.get("memory_rewritten") else None,
+        )
 
     # Sticky bottom chat input
     query = st.chat_input("Hỏi về chương trình AI Thực Chiến...")
@@ -77,7 +80,8 @@ def render_chat_page(top_k: int = 5) -> None:
     if not query:
         return
 
-    # Add user message to state
+    # Snapshot prior turns before adding the current question.
+    history = list(messages)
     st.session_state.messages.append({"role": "user", "content": query})
     render_message("user", query)
 
@@ -86,9 +90,9 @@ def render_chat_page(top_k: int = 5) -> None:
         response_box = st.empty()
         with st.spinner("Đang truy xuất tài liệu và tổng hợp câu trả lời…"):
             try:
-                from src.task10_generation import generate_with_citation
+                from src.task10_generation import generate_with_memory
 
-                result = generate_with_citation(query, top_k=top_k)
+                result = generate_with_memory(query, history=history, top_k=top_k)
                 answer = str(result.get("answer") or "").strip()
                 sources = result.get("sources") or []
                 safe_refusal = not answer or result.get("retrieval_source") == "none" or "không thể xác minh" in answer.lower()
@@ -103,6 +107,8 @@ def render_chat_page(top_k: int = 5) -> None:
                         "content": answer,
                         "sources": sources,
                         "safe_refusal": safe_refusal,
+                        "retrieval_query": result.get("retrieval_query"),
+                        "memory_rewritten": result.get("memory_rewritten", False),
                     }
                 )
                 response_box.empty()

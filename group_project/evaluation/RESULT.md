@@ -129,3 +129,18 @@ HyDE adds 0.008 macro-average points relative to B without HyDE and 1.739 second
 | `sem-02` — Mentor Duty fields | B full | 1.0 | 0.5 | 0.67 | 1.0 | Some required fields span adjacent chunks; answer missed part of the five-field list. |
 
 **Recommendations:** retain listwise reranking as the most promising remote component, test adjacent-chunk expansion for multi-part questions, and add fact-level/alternative-source labels to the golden set before treating exact-snippet recall as a final quality measure. Keep A available for latency-sensitive queries. The rubric judge is the same model family as the generator; manually audit the 16 answers before a production switch.
+
+## Conversation Memory probe — contextual query rewriting
+
+The Streamlit chat now sends up to two preceding user/assistant exchanges to DeepSeek, which rewrites a follow-up as a standalone question before retrieval. The original question remains visible; prior assistant answers are used only to resolve references, never as grounding evidence. If rewriting fails, retrieval uses the original question. [run_memory_probe.py](run_memory_probe.py) and [memory_probe_results.json](memory_probe_results.json) record a three-case probe against the same 304-chunk corpus, using `deepseek-flash` and the current retrieval pipeline (`top_k=5`).
+
+| Follow-up | Original top-5 expected-source hit | With memory | Rewrite |
+| --- | ---: | ---: | --- |
+| Mentor Duty: “Nếu nộp sau 12h thì còn được XP không?” | Yes | Yes | Model kept the question unchanged. |
+| Demo Day: “Mục thứ 6 dài bao lâu?” | No | Yes | Resolved “mục thứ 6” to Demo Day's deliverables. |
+| CP1 Canvas: “Cần bao nhiêu người sẵn sàng thử nghiệm?” | Yes | Yes | Added CP1 Canvas/Hackathon context. |
+| **Expected-source hit rate** | **2/3** | **3/3** | **2/3 questions changed** |
+
+Median rewrite time was **1.028 s** (three DeepSeek calls, zero failures). This is a small retrieval-only demonstration, not an answer-quality score or a replacement for the 16-case A/B and ablation tables above. Retrieval timing is affected by cache warm-up and is not compared as a latency claim. A larger multi-turn golden set with evidence-level labels is needed to estimate memory's effect on faithfulness and answer relevance.
+
+An additional live end-to-end check of the Demo Day follow-up returned “Video Demo, 3–5 phút [Document 1]” with five retrieved chunks and a valid citation. It was a functional smoke check, outside the three-case retrieval metric.

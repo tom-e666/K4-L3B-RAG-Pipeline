@@ -204,6 +204,10 @@ def test_retrieve_uses_dense_score_for_fallback(monkeypatch):
 def test_retrieve_fuses_once_when_dense_is_confident(monkeypatch):
     import src.task9_retrieval_pipeline as pipeline
 
+    monkeypatch.setattr(pipeline, "DENSE_WEIGHT", 1.0)
+    monkeypatch.setattr(pipeline, "BM25_WEIGHT", 1.0)
+    monkeypatch.setattr(pipeline, "USE_LLM_RERANK", False)
+
     dense = [result("chunk-0", 0.9, "dense")]
     sparse = [result("chunk-1", 4.0, "bm25")]
     fused = [result("chunk-0", 0.03, "hybrid")]
@@ -230,6 +234,10 @@ def test_retrieve_fuses_once_when_dense_is_confident(monkeypatch):
 
 def test_retrieve_survives_fallback_provider_error(monkeypatch):
     import src.task9_retrieval_pipeline as pipeline
+
+    monkeypatch.setattr(pipeline, "DENSE_WEIGHT", 1.0)
+    monkeypatch.setattr(pipeline, "BM25_WEIGHT", 1.0)
+    monkeypatch.setattr(pipeline, "USE_LLM_RERANK", False)
 
     dense = [result("chunk-0", 0.2, "dense")]
     hybrid = [result("chunk-0", 0.02, "hybrid")]

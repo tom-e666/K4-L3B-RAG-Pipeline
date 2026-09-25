@@ -35,3 +35,7 @@ HyDE thêm 0.008 điểm trung bình so với B không HyDE và 1.739 giây vào
 | 4 | B full tăng điểm trung bình 0.016 nhưng p50 tăng 8.897 s | Giữ A cho truy vấn nhạy độ trễ; chỉ bật pipeline đầy đủ khi lợi ích retrieval rõ ràng. |
 
 Chi tiết từng case, hai lượt đo trước và phương pháp được lưu trong [báo cáo evaluation](../group_project/evaluation/RESULT.md). Dữ liệu gốc: [latest_summary.json](../group_project/evaluation/latest_summary.json) và [latest_details.json](../group_project/evaluation/latest_details.json). Dashboard Streamlit ở mục **Đánh giá A/B** cho phép chọn lượt đo và so sánh nhiều strategy trong cùng lượt.
+
+## Conversation Memory
+
+Chat Streamlit đã có contextual query rewriting: DeepSeek dùng tối đa hai lượt hội thoại trước để biến câu hỏi nối tiếp thành câu độc lập trước khi truy xuất. Nếu bước này lỗi, hệ thống dùng câu hỏi gốc; câu trả lời vẫn chỉ dựa trên chunks truy xuất và phải qua citation gate. Probe ba câu hỏi nối tiếp cho thấy expected-source hit ở top 5 tăng từ **2/3 lên 3/3**; trường hợp “Mục thứ 6 dài bao lâu?” chỉ tìm đúng quy định Demo Day sau khi được viết lại. Trung vị thời gian viết lại là **1.028 giây**, lỗi **0/3**. Đây là minh chứng nhỏ cho chức năng Memory, chưa phải đánh giá chất lượng câu trả lời nhiều lượt. Dữ liệu và script ở [báo cáo evaluation](../group_project/evaluation/RESULT.md#conversation-memory-probe--contextual-query-rewriting).

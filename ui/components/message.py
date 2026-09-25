@@ -116,7 +116,13 @@ def render_source_cards(sources: list[dict[str, Any]]) -> None:
             st.markdown(card_html, unsafe_allow_html=True)
 
 
-def render_message(role: str, content: str, sources: list[dict] | None = None, safe_refusal: bool = False) -> None:
+def render_message(
+    role: str,
+    content: str,
+    sources: list[dict] | None = None,
+    safe_refusal: bool = False,
+    retrieval_query: str | None = None,
+) -> None:
     """Render a single user or assistant chat message."""
     if role == "user":
         with st.chat_message("user", avatar="🧑"):
@@ -134,6 +140,9 @@ def render_message(role: str, content: str, sources: list[dict] | None = None, s
             # Format formatted content with badges
             clean_content = format_citations_to_badges(html.escape(content))
             st.markdown(clean_content, unsafe_allow_html=True)
+
+            if retrieval_query:
+                st.caption(f"Câu hỏi truy xuất từ hội thoại: {retrieval_query}")
 
             if sources:
                 render_source_cards(sources)

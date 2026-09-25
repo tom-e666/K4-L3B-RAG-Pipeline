@@ -1,0 +1,122 @@
+[
+  {
+    "id": "memory-mentor-xp",
+    "history": [
+      {
+        "role": "user",
+        "content": "Mentor Duty là gì?"
+      },
+      {
+        "role": "assistant",
+        "content": "Mentor Duty là buổi làm việc định kỳ với mentor."
+      }
+    ],
+    "question": "Nếu nộp sau 12h thì còn được XP không?",
+    "expected_source": "quy-dinh-mentor-duty.md",
+    "rewritten_query": "Nếu nộp sau 12h thì còn được XP không?",
+    "changed": false,
+    "rewrite_latency_s": 1.87,
+    "original": {
+      "sources": [
+        "quy-dinh-mentor-duty.md",
+        "20K-AI-Handbook-ver2.1.md",
+        "20K-AI-Handbook-ver2.1.md",
+        "20K-AI-Handbook-ver2.1.md",
+        "20K-AI-Handbook-ver2.1.md"
+      ],
+      "latency_s": 14.185,
+      "source_hit": true
+    },
+    "memory": {
+      "sources": [
+        "quy-dinh-mentor-duty.md",
+        "20K-AI-Handbook-ver2.1.md",
+        "20K-AI-Handbook-ver2.1.md",
+        "20K-AI-Handbook-ver2.1.md",
+        "20K-AI-Handbook-ver2.1.md"
+      ],
+      "latency_s": 3.843,
+      "source_hit": true
+    }
+  },
+  {
+    "id": "memory-demo-video",
+    "history": [
+      {
+        "role": "user",
+        "content": "Demo Day yêu cầu những deliverables nào?"
+      },
+      {
+        "role": "assistant",
+        "content": "Quy định liệt kê 10 deliverables."
+      }
+    ],
+    "question": "Mục thứ 6 dài bao lâu?",
+    "expected_source": "quy-dinh-deliverables-demo-day.md",
+    "rewritten_query": "Mục thứ 6 trong 10 deliverables của Demo Day dài bao lâu?",
+    "changed": true,
+    "rewrite_latency_s": 0.854,
+    "original": {
+      "sources": [
+        "20K-AI-Handbook-ver2.1.md",
+        "20K-AI-Handbook-ver2.1.md",
+        "20K-AI-Handbook-ver2.1.md",
+        "20K-AI-Handbook-ver2.1.md",
+        "20K-AI-Handbook-ver2.1.md"
+      ],
+      "latency_s": 3.009,
+      "source_hit": false
+    },
+    "memory": {
+      "sources": [
+        "quy-dinh-deliverables-demo-day.md",
+        "quy-dinh-deliverables-demo-day.md",
+        "quy-dinh-deliverables-demo-day.md",
+        "quy-dinh-deliverables-demo-day.md",
+        "quy-dinh-deliverables-demo-day.md"
+      ],
+      "latency_s": 3.122,
+      "source_hit": true
+    }
+  },
+  {
+    "id": "memory-canvas",
+    "history": [
+      {
+        "role": "user",
+        "content": "CP1 Canvas trong Hackathon là gì?"
+      },
+      {
+        "role": "assistant",
+        "content": "Đây là bản phác thảo ý tưởng tại CP1."
+      }
+    ],
+    "question": "Cần bao nhiêu người sẵn sàng thử nghiệm?",
+    "expected_source": "quy-che-ai-product-hackathon.md",
+    "rewritten_query": "Cần bao nhiêu người sẵn sàng thử nghiệm CP1 Canvas trong Hackathon?",
+    "changed": true,
+    "rewrite_latency_s": 1.028,
+    "original": {
+      "sources": [
+        "quy-che-ai-product-hackathon.md",
+        "quy-che-ai-product-hackathon.md",
+        "quy-dinh-deliverables-demo-day.md",
+        "20K-AI-Handbook-ver2.1.md",
+        "20K-AI-Handbook-ver2.1.md"
+      ],
+      "latency_s": 4.016,
+      "source_hit": true
+    },
+    "memory": {
+      "sources": [
+        "quy-che-ai-product-hackathon.md",
+        "quy-che-ai-product-hackathon.md",
+        "quy-che-ai-product-hackathon.md",
+        "quy-che-ai-product-hackathon.md",
+        "quy-che-ai-product-hackathon.md"
+      ],
+      "latency_s": 3.827,
+      "source_hit": true
+    }
+  }
+]

@@ -36,6 +36,45 @@ LLM_MODEL = os.getenv("LLM_MODEL") or (
 
 SAFE_REFUSAL_ANSWER = "Tôi không thể xác minh thông tin này từ nguồn hiện có."
 
+QUERY_REWRITE_PROMPT = """Bạn viết lại câu hỏi nối tiếp trong hội thoại thành một câu hỏi độc lập để tìm tài liệu.
+Chỉ dùng lịch sử để hiểu các đại từ, đối tượng và phần bị lược bỏ; không dùng câu trả lời cũ làm bằng chứng và không thêm sự kiện mới.
+Giữ nguyên ý định, số liệu, tên riêng trong câu hỏi hiện tại. Nếu câu hỏi đã độc lập, chép lại nguyên văn.
+Chỉ trả về đúng một câu hỏi, không giải thích, không trả lời câu hỏi."""
+
+
+def rewrite_followup_query(query: str, history: list[dict]) -> tuple[str, bool]:
+    """Resolve a follow-up using at most two earlier user/assistant exchanges."""
+    if not history:
+        return query, False
+
+    turns = [
+        item for item in history
+        if isinstance(item, dict)
+        and item.get("role") in {"user", "assistant"}
+        and isinstance(item.get("content"), str)
+        and item["content"].strip()
+    ]
+    if not any(item["role"] == "user" for item in turns):
+        return query, False
+
+    # Keep the last two user turns and their answers, excluding the new query.
+    user_positions = [index for index, item in enumerate(turns) if item["role"] == "user"]
+    turns = turns[user_positions[max(0, len(user_positions) - 2)]:]
+    transcript = "\n".join(
+        f"{item['role']}: {item['content'].strip()[:700]}" for item in turns
+    )
+    try:
+        candidate = call_llm(
+            QUERY_REWRITE_PROMPT,
+            f"Lịch sử hội thoại (chỉ để xác định ngữ cảnh):\n{transcript}\n\nCâu hỏi mới: {query}",
+        ).strip().strip('`"\' ')
+        if not candidate or len(candidate) > 600 or "\n" in candidate:
+            raise ValueError("Invalid standalone query")
+        return candidate, candidate != query
+    except Exception as exc:
+        logger.warning("Conversation query rewrite failed: %s", exc)
+        return query, False
+
 SYSTEM_PROMPT = """Bạn là trợ lý AI trả lời câu hỏi dựa trên tài liệu.
 Quy tắc bắt buộc:
 1. Trả lời CHỈ dựa trên thông tin có trong phần Context dưới đây. CẤM tự ý suy đoán hoặc dùng kiến thức bên ngoài context.
@@ -295,6 +334,13 @@ def generate_with_citation(query: str, top_k: int = TOP_K) -> dict:
             "sources": chunks[:top_k],
             "retrieval_source": chunks[0]["retrieval_method"] if chunks else "none",
         }
+
+
+def generate_with_memory(query: str, history: list[dict], top_k: int = TOP_K) -> dict:
+    """Rewrite follow-ups before retrieval; keep the original question for display."""
+    retrieval_query, rewritten = rewrite_followup_query(query, history)
+    result = generate_with_citation(retrieval_query, top_k=top_k)
+    return {**result, "retrieval_query": retrieval_query, "memory_rewritten": rewritten}
 
 
 if __name__ == "__main__":
