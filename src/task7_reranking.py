@@ -88,6 +88,115 @@ def rerank_rrf(
     return results
 
 
+import json
+import logging
+
+logger = logging.getLogger(__name__)
+
+LISTWISE_RERANK_PROMPT = """Bạn là hệ thống xếp hạng tài liệu chuyên sâu cho RAG.
+Nhiệm vụ: Dựa vào câu hỏi (Query) và danh sách các đoạn tài liệu (Candidate Documents), hãy xếp hạng lại các tài liệu theo mức độ liên quan từ CAO nhất đến THẤP nhất để trả lời cho câu hỏi.
+
+Quy tắc:
+1. Đánh giá tính liên quan trực tiếp của nội dung tài liệu đối với câu hỏi.
+2. Trả về ĐÚNG 1 ĐỐI TƯỢNG JSON với key "ranked_ids" chứa danh sách ID của các tài liệu đã được sắp xếp.
+3. Không giải thích thêm, chỉ trả về JSON hợp lệ.
+
+Ví dụ định dạng trả về:
+{"ranked_ids": ["doc_id_1", "doc_id_2", "doc_id_3"]}
+"""
+
+
+def call_llm(system_prompt: str, user_message: str) -> str:
+    from .task10_generation import call_llm as _call_llm
+    return _call_llm(system_prompt, user_message)
+
+
+def llm_listwise_rerank(
+    query: str,
+    chunks: list[dict],
+    top_k: int = 5,
+    *,
+    max_content_length: int = 300,
+) -> list[dict]:
+    """Rerank lại danh sách candidate chunks bằng LLM Listwise Reranking.
+    
+    Yêu cầu:
+    - Candidate set candidate_k = min(15, top_k * 3).
+    - Prompt chỉ chứa candidate ID, title, source và content rút gọn.
+    - Trả về JSON {"ranked_ids": [...]}.
+    - Validate JSON: ID thuộc candidate set, unique; append ID chưa xuất hiện để đủ top_k.
+    - Fallback: trả về candidates top-k nếu có lỗi/timeout.
+    """
+    if not chunks:
+        return []
+
+    candidate_k = min(15, top_k * 3)
+    candidates = chunks[:candidate_k]
+    candidate_map = {item["id"]: item for item in candidates}
+
+    # Chuẩn bị nội dung rút gọn gửi tới LLM
+    doc_entries = []
+    for item in candidates:
+        title = item.get("metadata", {}).get("title", "")
+        source = item.get("metadata", {}).get("source", "")
+        snippet = item.get("content", "")[:max_content_length].replace("\n", " ")
+        doc_entries.append(
+            f"ID: {item['id']}\nTitle: {title}\nSource: {source}\nSnippet: {snippet}"
+        )
+
+    candidates_text = "\n---\n".join(doc_entries)
+    user_message = f"Query: {query}\n\nCandidate Documents:\n{candidates_text}"
+
+    try:
+        raw_response = call_llm(LISTWISE_RERANK_PROMPT, user_message)
+
+        clean_text = raw_response.strip()
+        if clean_text.startswith("```json"):
+            clean_text = clean_text[7:]
+        if clean_text.startswith("```"):
+            clean_text = clean_text[3:]
+        if clean_text.endswith("```"):
+            clean_text = clean_text[:-3]
+        clean_text = clean_text.strip()
+
+        parsed = json.loads(clean_text)
+        ranked_ids = parsed.get("ranked_ids", [])
+
+        # Validate: ID thuộc candidate set & unique
+        valid_ranked_ids = []
+        seen = set()
+        for doc_id in ranked_ids:
+            if doc_id in candidate_map and doc_id not in seen:
+                valid_ranked_ids.append(doc_id)
+                seen.add(doc_id)
+
+        # Append các candidate ID chưa xuất hiện để bảo toàn dữ liệu
+        for item in candidates:
+            if item["id"] not in seen:
+                valid_ranked_ids.append(item["id"])
+                seen.add(item["id"])
+
+        reranked_results = []
+        for rank, doc_id in enumerate(valid_ranked_ids[:top_k], 1):
+            res = candidate_map[doc_id].copy()
+            res["score"] = max(0.01, round(1.0 - (rank - 1) * 0.05, 4))
+            res["retrieval_method"] = "hybrid"
+            reranked_results.append(res)
+
+        return reranked_results
+
+    except Exception as exc:
+        logger.warning("LLM listwise rerank error: %s. Returning default candidates.", exc)
+        fallback_results = []
+        for item in candidates[:top_k]:
+            res = item.copy()
+            res["retrieval_method"] = "hybrid"
+            fallback_results.append(res)
+        return fallback_results
+
+
 if __name__ == "__main__":
-    print("Weighted RRF implementation ready.")
+    print("Weighted RRF & LLM Listwise Rerank ready.")
+
+
 
