@@ -17,10 +17,11 @@ from dotenv import load_dotenv
 
 from .task5_semantic_search import semantic_search
 from .task6_lexical_search import lexical_search
-from .task7_reranking import rerank_rrf, weighted_rrf
+from .task7_reranking import llm_listwise_rerank, rerank_rrf, weighted_rrf
 from .task8_pageindex_vectorless import pageindex_search
 
 load_dotenv()
+
 
 def _parse_float(val: str | None, default: float) -> float:
     if not val or not val.strip():
@@ -38,6 +39,8 @@ DEFAULT_TOP_K = 5
 DENSE_WEIGHT = _parse_float(os.getenv("DENSE_WEIGHT"), 1.0)
 BM25_WEIGHT = _parse_float(os.getenv("BM25_WEIGHT"), 1.0)
 
+# USE_LLM_RERANK đọc từ .env (Mặc định False để tuân thủ contract tests gốc)
+USE_LLM_RERANK = os.getenv("USE_LLM_RERANK", "false").lower() in {"true", "1", "yes"}
 
 
 def retrieve(
@@ -47,20 +50,28 @@ def retrieve(
     use_reranking: bool = True,
 ) -> list[dict]:
     """Trả về hybrid hoặc pageindex SearchResult."""
-    dense = semantic_search(query, top_k=top_k * 2)
-    sparse = lexical_search(query, top_k=top_k * 2)
+    candidate_fetch_k = max(top_k * 3, 15) if (use_reranking and USE_LLM_RERANK) else top_k * 2
+    dense = semantic_search(query, top_k=candidate_fetch_k)
+    sparse = lexical_search(query, top_k=candidate_fetch_k)
 
     if use_reranking:
+        target_k = candidate_fetch_k if USE_LLM_RERANK else top_k
         if DENSE_WEIGHT != 1.0 or BM25_WEIGHT != 1.0:
             hybrid = weighted_rrf(
                 dense,
                 sparse,
                 dense_weight=DENSE_WEIGHT,
                 bm25_weight=BM25_WEIGHT,
-                top_k=top_k,
+                top_k=target_k,
             )
         else:
-            hybrid = rerank_rrf([dense, sparse], top_k=top_k)
+            hybrid = rerank_rrf([dense, sparse], top_k=target_k)
+
+        if USE_LLM_RERANK:
+            try:
+                hybrid = llm_listwise_rerank(query, hybrid, top_k=top_k)
+            except Exception:
+                hybrid = hybrid[:top_k]
     else:
         hybrid = dense[:top_k]
 
@@ -73,6 +84,7 @@ def retrieve(
         except Exception:
             pass
     return hybrid[:top_k]
+
 
 
 
