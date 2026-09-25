@@ -157,13 +157,13 @@ def call_llm(system_prompt: str, user_message: str) -> str:
 
 
 def generate_with_citation(query: str, top_k: int = TOP_K) -> dict:
-    """Trả về GenerationResult."""
-    # TODO: Implement end-to-end generation.
-    
+    """Trả về GenerationResult kèm grounding & citation verification."""
+    try:
         chunks = retrieve(query, top_k=top_k)
     except Exception as exc:
         logger.error(f"Retrieve error: {exc}")
         chunks = []
+
 
     if not chunks:
         return {
