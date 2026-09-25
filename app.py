@@ -1,45 +1,34 @@
+"""Application entry point for the Streamlit AI20K assistant."""
+
 import streamlit as st
 from dotenv import load_dotenv
 
+from ui.chat import render_chat_page
+from ui.evaluation import render_evaluation_page
+from ui.styles import inject_styles
 
 load_dotenv()
 
-st.set_page_config(
-    page_title="RAG Chatbot",
-    page_icon="",
-    layout="wide",
-)
 
-if "messages" not in st.session_state:
-    st.session_state.messages = []
+def main() -> None:
+    st.set_page_config(page_title="Trợ lý AI Thực Chiến", page_icon="🤖", layout="wide")
+    inject_styles()
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
 
-with st.sidebar:
-    st.title("RAG Chatbot")
-    st.caption("Thay mô tả theo đề tài của nhóm")
-    top_k = st.slider("Số chunks", 3, 10, 5)
+    with st.sidebar:
+        page = st.radio(
+            "Điều hướng",
+            ["Chat", "Đánh giá A/B"],
+            key="page",
+            label_visibility="collapsed",
+        )
 
-st.title("RAG Chatbot")
-st.caption("Thay tiêu đề và hướng dẫn sử dụng")
+    if page == "Chat":
+        render_chat_page()
+    else:
+        render_evaluation_page()
 
-for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
-        # TODO: Hiển thị sources và retrieval score.
 
-query = st.chat_input("Nhập câu hỏi...")
-
-if query:
-    st.session_state.messages.append({"role": "user", "content": query})
-
-    with st.chat_message("user"):
-        st.markdown(query)
-
-    with st.chat_message("assistant"):
-        # TODO: Gọi generate_with_citation(query, top_k).
-        answer = "TODO: Itegration RAG Pipeline hêre"
-        sources = []
-        st.markdown(answer)
-
-        # TODO: Hiển thị sources và citation.
-
-    # TODO: Lưu answer và sources vào session state.
+if __name__ == "__main__":
+    main()
