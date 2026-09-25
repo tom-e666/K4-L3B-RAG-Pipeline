@@ -70,22 +70,15 @@ def render_chat_page() -> None:
     st.markdown(
         '<section class="hero"><div class="eyebrow">AI20K · Tra cứu tài liệu chính thức</div>'
         '<h1>Trợ lý AI Thực Chiến</h1>'
-        '<p>Hỏi về chương trình, lộ trình học và quy định. Xem các đoạn tài liệu được truy xuất dưới mỗi câu trả lời.</p></section>',
+        '<p>Hỏi về chương trình, lộ trình học và quy định. Câu trả lời luôn đi kèm nguồn để bạn kiểm tra.</p></section>',
         unsafe_allow_html=True,
     )
 
     with st.sidebar:
         st.markdown("### Trợ lý AI Thực Chiến")
-        st.caption("Tra cứu từ tài liệu AI20K đã lập chỉ mục")
-        st.markdown(
-            '<span class="pipeline-badge">DeepSeek</span>'
-            '<span class="pipeline-badge">Hybrid search</span>'
-            '<span class="pipeline-badge">Citation</span>',
-            unsafe_allow_html=True,
-        )
-        top_k = st.slider("Số đoạn tài liệu", min_value=3, max_value=10, value=5,
-                          help="Số đoạn tối đa dùng để tạo câu trả lời.")
-        if st.button("＋ Cuộc trò chuyện mới", type="primary", width="stretch"):
+        st.caption("Tra cứu thông tin chương trình từ tài liệu chính thức")
+        top_k = st.slider("Số nguồn sử dụng", min_value=3, max_value=10, value=5)
+        if st.button("＋ Cuộc trò chuyện mới", width="stretch"):
             st.session_state.messages = []
             st.rerun()
 
@@ -101,9 +94,9 @@ def render_chat_page() -> None:
             '<div>Trợ lý sẽ tìm trong bộ tài liệu AI20K trước khi trả lời.</div></div>',
             unsafe_allow_html=True,
         )
-        st.caption("Gợi ý câu hỏi")
-        for index, suggestion in enumerate(suggestions):
-            if st.button(suggestion, key=f"suggestion-{index}", width="stretch"):
+        cols = st.columns(len(suggestions))
+        for col, suggestion in zip(cols, suggestions):
+            if col.button(suggestion, width="stretch"):
                 st.session_state.pending_query = suggestion
                 st.rerun()
 
