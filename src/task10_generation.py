@@ -67,7 +67,9 @@ def call_llm(system_prompt: str, user_message: str) -> str:
     # Dùng LLM_MODEL và trả về text thuần cho cả ba nhánh.
     if LLM_PROVIDER == "openai":
         from openai import OpenAI
-        client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+        api_key = os.getenv("OPENAI_API_KEY")
+        base_url = os.getenv("OPENAI_BASE_URL") or os.getenv("BASE_URL")
+        client = OpenAI(api_key=api_key, base_url=base_url) if base_url else OpenAI(api_key=api_key)
         completion = client.chat.completions.create(
             model=LLM_MODEL,
             messages=[{"role": "system", "content": system_prompt}, {"role": "user", "content": user_message}],

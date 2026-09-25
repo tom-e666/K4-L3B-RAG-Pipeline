@@ -55,3 +55,10 @@ pageindex_pdfs/
 # OS
 .DS_Store
 Thumbs.db
+
+# Local guide and temporary reports
+HUONG_DAN_THUC_HIEN_LAB8.md
+group_project/evaluation/RESULT.md
+chromadb/*
+tests/test_advanced*.py
+

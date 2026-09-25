@@ -11,7 +11,11 @@ Mỗi document/chunk phải theo docs/MODULE_CONTRACTS.md. ID cần ổn định
 chạy lại pipeline không tạo dữ liệu trùng. Task 5 phải dùng chung embed_texts().
 """
 
+import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 STANDARDIZED_DIR = Path(__file__).parent.parent / "data" / "standardized"
@@ -22,19 +26,55 @@ CHUNK_SIZE = 500
 CHUNK_OVERLAP = 50
 CHUNKING_METHOD = "recursive"
 
-EMBEDDING_MODEL = "BAAI/bge-m3"
-EMBEDDING_DIM = 1024
+EMBEDDING_PROVIDER = os.getenv("EMBEDDING_PROVIDER", "gemini")
+EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "gemini-embedding-2")
+EMBEDDING_DIM = 768
 
 COLLECTION_NAME = "rag_documents"
 
 
 def embed_texts(texts: list[str]) -> list[list[float]]:
-    # TODO: Dispatch theo EMBEDDING_PROVIDER trong .env.
-    #
-    # Provider local gợi ý:
-    from sentence_transformers import SentenceTransformer
-    model = SentenceTransformer(EMBEDDING_MODEL)
-    return model.encode(texts).tolist()
+    """Dispatch embedding provider theo EMBEDDING_PROVIDER trong .env."""
+    if not texts:
+        return []
+
+    provider = os.getenv("EMBEDDING_PROVIDER", EMBEDDING_PROVIDER).lower()
+    model_name = os.getenv("EMBEDDING_MODEL", EMBEDDING_MODEL)
+
+    if provider == "gemini":
+        from google import genai
+        api_key = os.getenv("GEMINI_API_KEY")
+        if not api_key:
+            raise ValueError("GEMINI_API_KEY không được tìm thấy trong môi trường hoặc file .env")
+        client = genai.Client(api_key=api_key)
+        
+        batch_size = 50
+        all_embeddings = []
+        for i in range(0, len(texts), batch_size):
+            batch = texts[i:i + batch_size]
+            response = client.models.embed_content(
+                model=model_name,
+                contents=batch,
+            )
+            for emb in response.embeddings:
+                all_embeddings.append(list(emb.values))
+        return all_embeddings
+
+    elif provider == "openai":
+        from openai import OpenAI
+        api_key = os.getenv("OPENAI_API_KEY")
+        base_url = os.getenv("OPENAI_BASE_URL") or os.getenv("BASE_URL")
+        client = OpenAI(api_key=api_key, base_url=base_url) if base_url else OpenAI(api_key=api_key)
+        response = client.embeddings.create(
+            model=model_name,
+            input=texts,
+        )
+        return [data.embedding for data in response.data]
+
+    else:
+        from sentence_transformers import SentenceTransformer
+        model = SentenceTransformer(model_name)
+        return model.encode(texts).tolist()
 
 
 def get_collection():
@@ -52,8 +92,6 @@ def get_collection():
 
 def load_documents() -> list[dict]:
     """Đọc Markdown và trả về danh sách Document."""
-    # TODO: Đọc mọi .md và tạo Document theo contract.
-    #
     documents = []
     for path in STANDARDIZED_DIR.rglob("*.md"):
         doc_type = "legal" if "legal" in path.parts else "news"
@@ -93,8 +131,8 @@ def chunk_documents(documents: list[dict]) -> list[dict]:
 
 def embed_chunks(chunks: list[dict]) -> list[dict]:
     """Thêm embedding vào từng chunk."""
-    # TODO: Embed theo batch và giữ nguyên các field của chunk.
-    #
+    if not chunks:
+        return []
     vectors = embed_texts([chunk["content"] for chunk in chunks])
     for chunk, vector in zip(chunks, vectors):
         chunk["embedding"] = vector
@@ -103,8 +141,9 @@ def embed_chunks(chunks: list[dict]) -> list[dict]:
 
 def index_to_vectorstore(chunks: list[dict]) -> None:
     """Upsert chunks vào ChromaDB."""
-    # TODO: Upsert ids, documents, embeddings và metadatas.
-    #
+    if not chunks:
+        print("⚠️ Không có chunks nào để index. Kiểm tra lại thư mục dữ liệu markdown (data/standardized).")
+        return
     collection = get_collection()
     collection.upsert(
         ids=[chunk["id"] for chunk in chunks],
